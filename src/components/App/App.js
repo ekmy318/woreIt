@@ -9,6 +9,11 @@ import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
+import Books from '../Books/Books'
+import Book from '../Books/Book'
+import CreateBook from '../Books/CreateBook'
+import UpdateBook from '../Books/UpdateBook'
+
 class App extends Component {
   constructor () {
     super()
@@ -54,6 +59,28 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
+          <Route exact path='/books' component={Books} />
+          <AuthenticatedRoute
+            user={user}
+            path='/create-book'
+            render={() => (
+              <CreateBook
+                user={user}
+                alert={this.alert} />
+            )} />
+
+          <Route exact path='/books/:id' render={() => (
+            <Book user={user} />
+          )} />
+
+          <AuthenticatedRoute
+            user={user}
+            exact path='/books/:id/edit'
+            render={() => (
+              <UpdateBook
+                user={user}
+                alert={this.alert} />
+            )} />
         </main>
       </Fragment>
     )
