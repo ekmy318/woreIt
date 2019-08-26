@@ -6,7 +6,7 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#create-book">Create a Book</Nav.Link>
+    <Nav.Link href="#create-post">Log an Outfit</Nav.Link>
   </Fragment>
 )
 
@@ -19,19 +19,19 @@ const unauthenticatedOptions = (
 
 const alwaysOptions = (
   <Fragment>
-    <Nav.Link href="#books">All Books</Nav.Link>
+    <Nav.Link href="#/">Home</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="#">
+  <Navbar bg="dark" variant="dark" expand="md">
+    <Navbar.Brand href="#/">
       woreIt
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
+        { user && <span className="navbar-text mr-2">Signed in as: {user.email}</span>}
         { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>

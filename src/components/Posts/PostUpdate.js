@@ -1,0 +1,83 @@
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+import axios from 'axios'
+
+import apiUrl from '../../apiConfig'
+import PostForm from './PostForm'
+
+class UpdateBook extends Component {
+  state = {
+    post: null
+  }
+
+  async componentDidMount () {
+    try {
+      const res = await axios({
+        method: 'GET',
+        url: `${apiUrl}/posts/${this.props.match.params.id}`,
+        headers: {
+          'Authorization': `Token token=${this.props.user.token}`
+        }
+      })
+      this.setState({ post: res.data.post })
+    } catch (error) {
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
+    }
+  }
+
+  handleChange = event => {
+    this.setState({ post: { ...this.state.post, [event.target.name]: event.target.value } })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    axios({
+      method: 'PATCH',
+      url: `${apiUrl}/posts/${this.state.post._id}`,
+      headers: {
+        'Authorization': `Token token=${this.props.user.token}`
+      },
+      data: {
+        post: this.state.post
+      }
+    })
+      .then(res => {
+        this.props.alert({
+          heading: 'Success!',
+          message: 'You updated the post!',
+          variant: 'success'
+        })
+        this.props.history.push(`/posts/${this.state.post._id}`)
+      })
+      .catch(res => {
+        this.props.alert({
+          heading: 'Error',
+          message: 'Failed to create a post',
+          variant: 'danger'
+        })
+      })
+  }
+
+  render () {
+    const { post } = this.state
+
+    if (!post) {
+      return (
+        <h1>Loading...</h1>
+      )
+    }
+    return (
+      <PostForm
+        post={post}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+      />
+    )
+  }
+}
+
+export default withRouter(UpdateBook)

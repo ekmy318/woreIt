@@ -4,15 +4,18 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
+// import Footer from '../Footer/Footer'
 import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
-import Books from '../Books/Books'
-import Book from '../Books/Book'
-import CreateBook from '../Books/CreateBook'
-import UpdateBook from '../Books/UpdateBook'
+import Home from '../Home/Home'
+
+import Posts from '../Posts/Posts'
+import Post from '../Posts/Post'
+import PostCreate from '../Posts/PostCreate'
+import PostUpdate from '../Posts/PostUpdate'
 
 class App extends Component {
   constructor () {
@@ -59,29 +62,33 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
-          <Route exact path='/books' component={Books} />
+
+          <Route exact path="/" component={Home}/>
+
+          <Route exact path='/posts' component={Posts} />
           <AuthenticatedRoute
             user={user}
-            path='/create-book'
+            path='/create-post'
             render={() => (
-              <CreateBook
+              <PostCreate
                 user={user}
                 alert={this.alert} />
             )} />
 
-          <Route exact path='/books/:id' render={() => (
-            <Book user={user} />
+          <Route exact path='/posts/:id' render={() => (
+            <Post user={user} alert={this.alert} />
           )} />
 
           <AuthenticatedRoute
             user={user}
-            exact path='/books/:id/edit'
+            exact path='/posts/:id/edit'
             render={() => (
-              <UpdateBook
+              <PostUpdate
                 user={user}
                 alert={this.alert} />
             )} />
         </main>
+        {/* <Footer /> */}
       </Fragment>
     )
   }
