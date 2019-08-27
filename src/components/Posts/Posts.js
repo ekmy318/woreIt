@@ -36,7 +36,7 @@ class Posts extends Component {
   }
 
   render () {
-    const postsJsx = this.state.posts.map(post => (
+    const postsJsx = this.state.posts.filter(post => post.owner.token === this.props.user.token).map(post => (
       <ListGroup.Item key={post._id}>
         <img src={post.file}/>
         <Link to={`/posts/${post._id}`}>{post.date}</Link>

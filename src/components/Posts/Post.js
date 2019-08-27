@@ -34,24 +34,24 @@ class Post extends Component {
     }
   }
 
-  delete = async () => {
-    try {
-      await axios.delete({
-        method: 'DELETE',
-        url: `${apiUrl}/posts/${this.props.match.params.id}`,
-        headers: {
-          'Authorization': `Token token=${this.props.user.token}`
-        }
-      })
-      this.setState({ deleted: true })
-    } catch (error) {
-      this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
-        variant: 'danger'
-      })
-    }
-  }
+  // delete = async () => {
+  //   try {
+  //     await axios.delete({
+  //       method: 'DELETE',
+  //       url: `${apiUrl}/posts/${this.props.match.params.id}`,
+  //       headers: {
+  //         'Authorization': `Token token=${this.props.user.token}`
+  //       }
+  //     })
+  //     this.setState({ deleted: true })
+  //   } catch (error) {
+  //     this.props.alert({
+  //       heading: 'Error',
+  //       message: 'Something went wrong..',
+  //       variant: 'danger'
+  //     })
+  //   }
+  // }
 
   render () {
     const { post, deleted } = this.state

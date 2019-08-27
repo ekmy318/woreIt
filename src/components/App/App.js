@@ -11,6 +11,7 @@ import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 
 import Home from '../Home/Home'
+import PostCalendar from '../PostCalendar/PostCalendar'
 
 import Posts from '../Posts/Posts'
 import Post from '../Posts/Post'
@@ -64,6 +65,14 @@ class App extends Component {
           )} />
 
           <Route exact path="/" component={Home}/>
+          <AuthenticatedRoute
+            user={user}
+            exact path='/calendar'
+            render={() => (
+              <PostCalendar
+                user={user}
+                alert={this.alert} />
+            )} />
 
           <AuthenticatedRoute
             user={user}
@@ -97,6 +106,15 @@ class App extends Component {
             exact path='/posts/:id/edit'
             render={() => (
               <PostUpdate
+                user={user}
+                alert={this.alert} />
+            )} />
+
+          <AuthenticatedRoute
+            user={user}
+            exact path='/posts/:date'
+            render={() => (
+              <Post
                 user={user}
                 alert={this.alert} />
             )} />
