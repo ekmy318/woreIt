@@ -60,7 +60,7 @@ class Post extends Component {
 
     if (deleted) {
       return <Redirect to={{
-        pathname: '/posts'
+        pathname: '/calendar'
         // this.props.alert({
         //   heading: 'Error',
         //   message: 'Something went wrong..',

@@ -35,8 +35,6 @@ class Posts extends Component {
       })
     }
   }
-
-  // && (<Moment format="ddd, MMMM DD, YYYY" date={post.date} /> === <Moment format="ddd, MMMM DD, YYYY" date={this.props.location.state.date} />))
   render () {
     const postsJsx = this.state.posts.filter(post =>
       (post.owner.token === this.props.user.token) && (this.props.location.state.date.substring(0, 10) === post.date.substring(0, 10))).map(post => (
