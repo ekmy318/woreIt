@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 
+import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -35,12 +36,13 @@ class Posts extends Component {
     }
   }
 
+  // && (<Moment format="ddd, MMMM DD, YYYY" date={post.date} /> === <Moment format="ddd, MMMM DD, YYYY" date={this.props.location.state.date} />))
   render () {
-    console.log(this.props.location.state.date)
-    const postsJsx = this.state.posts.filter(post => post.owner.token === this.props.user.token).map(post => (
+    const postsJsx = this.state.posts.filter(post =>
+      (post.owner.token === this.props.user.token) && (this.props.location.state.date.substring(0, 10) === post.date.substring(0, 10))).map(post => (
       <ListGroup.Item key={post._id}>
         <img src={post.file}/>
-        <Link to={`/posts/${post._id}`}>{post.date}</Link>
+        <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
         <p>Notes: {post.notes}</p>
       </ListGroup.Item>
     ))

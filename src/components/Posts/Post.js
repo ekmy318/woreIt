@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Button from 'react-bootstrap/Button'
+import Moment from 'react-moment'
 
 class Post extends Component {
   constructor (props) {
@@ -70,7 +71,7 @@ class Post extends Component {
       postJsx = (
         <Fragment>
           <img src={post.file} />
-          <h3>{post.date || 'No date provided'}</h3>
+          <h3><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></h3>
           <p>{post.notes || 'No notes provided'}</p>
           <Button href={`#posts/${post._id}/edit`}>Edit Post</Button>
           <Button onClick={this.delete}>Delete Post</Button>

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import PostForm from './PostForm'
-import WebcamCapture from '../WebcamCapture/WebcamCapture'
+// import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
   state = {
@@ -54,9 +54,6 @@ class PostCreate extends Component {
           post={this.state.post}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-        />
-        <WebcamCapture
-
         />
       </div>
     )

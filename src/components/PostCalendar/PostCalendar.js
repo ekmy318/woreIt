@@ -9,8 +9,12 @@ class PostCalendar extends Component {
     clicked: false
   }
 
+  // calendarType = weekStartDay => {
+  //   weekStartDay === 0 ? 'US' : 'ISO 8601'
+  // }
+
   onClickDay = date => {
-    this.setState({ date: date, clicked: true })
+    this.setState({ date: date.toISOString(), clicked: true })
   }
 
   render () {
@@ -25,6 +29,7 @@ class PostCalendar extends Component {
         <Calendar
           onClickDay={this.onClickDay}
           value={this.state.date}
+          locale= 'en-US'
         />
       </div>
     )
