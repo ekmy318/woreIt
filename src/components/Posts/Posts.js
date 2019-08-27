@@ -38,7 +38,9 @@ class Posts extends Component {
   render () {
     const postsJsx = this.state.posts.map(post => (
       <ListGroup.Item key={post._id}>
+        <img src={post.file}/>
         <Link to={`/posts/${post._id}`}>{post.date}</Link>
+        <p>Notes: {post.notes}</p>
       </ListGroup.Item>
     ))
 

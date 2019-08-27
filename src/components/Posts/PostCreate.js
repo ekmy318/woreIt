@@ -30,7 +30,6 @@ class PostCreate extends Component {
       data: formData
     })
       .then(res => {
-        console.log(res.data)
         this.props.alert({
           heading: 'Success!',
           message: 'You made a post!',

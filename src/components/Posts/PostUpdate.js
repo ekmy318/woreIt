@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-
 import apiUrl from '../../apiConfig'
 import PostForm from './PostForm'
 
-class UpdateBook extends Component {
+class PostUpdate extends Component {
   state = {
     post: null
   }
@@ -19,6 +19,7 @@ class UpdateBook extends Component {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
+      console.log(res.data.post)
       this.setState({ post: res.data.post })
     } catch (error) {
       this.props.alert({
@@ -35,15 +36,14 @@ class UpdateBook extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
+    const formData = new FormData(event.target)
     axios({
       method: 'PATCH',
       url: `${apiUrl}/posts/${this.state.post._id}`,
       headers: {
         'Authorization': `Token token=${this.props.user.token}`
       },
-      data: {
-        post: this.state.post
-      }
+      data: formData
     })
       .then(res => {
         this.props.alert({
@@ -51,7 +51,8 @@ class UpdateBook extends Component {
           message: 'You updated the post!',
           variant: 'success'
         })
-        this.props.history.push(`/posts/${this.state.post._id}`)
+        return <Redirect to={`/posts/${this.state.post._id}`} />
+        // this.props.history.push(`/posts/${this.state.post._id}`)
       })
       .catch(res => {
         this.props.alert({
@@ -80,4 +81,4 @@ class UpdateBook extends Component {
   }
 }
 
-export default withRouter(UpdateBook)
+export default withRouter(PostUpdate)

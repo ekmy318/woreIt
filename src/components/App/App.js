@@ -65,7 +65,15 @@ class App extends Component {
 
           <Route exact path="/" component={Home}/>
 
-          <Route exact path='/posts' component={Posts} />
+          <AuthenticatedRoute
+            user={user}
+            exact path='/posts'
+            render={() => (
+              <Posts
+                user={user}
+                alert={this.alert} />
+            )} />
+
           <AuthenticatedRoute
             user={user}
             path='/create-post'
@@ -75,9 +83,14 @@ class App extends Component {
                 alert={this.alert} />
             )} />
 
-          <Route exact path='/posts/:id' render={() => (
-            <Post user={user} alert={this.alert} />
-          )} />
+          <AuthenticatedRoute
+            user={user}
+            exact path='/posts/:id'
+            render={() => (
+              <Post
+                user={user}
+                alert={this.alert} />
+            )} />
 
           <AuthenticatedRoute
             user={user}
