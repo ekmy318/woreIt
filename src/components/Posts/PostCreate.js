@@ -17,6 +17,7 @@ class PostCreate extends Component {
 
   handleChange = event => {
     this.setState({ post: { ...this.state.post, [event.target.name]: event.target.value } })
+    console.log(event.target.value)
   }
 
   handleSubmit = event => {
@@ -48,6 +49,13 @@ class PostCreate extends Component {
   }
 
   render () {
+    const { post } = this.state
+
+    if (!post) {
+      return (
+        <h1>Loading...</h1>
+      )
+    }
     return (
       <div>
         <PostForm

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -50,8 +49,7 @@ class PostUpdate extends Component {
           message: 'You updated the post!',
           variant: 'success'
         })
-        return <Redirect to={`/posts/${this.state.post._id}`} />
-        // this.props.history.push(`/posts/${this.state.post._id}`)
+        this.props.history.push(`/posts/${this.state.post._id}`)
       })
       .catch(res => {
         this.props.alert({

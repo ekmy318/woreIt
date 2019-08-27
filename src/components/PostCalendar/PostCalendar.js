@@ -9,10 +9,6 @@ class PostCalendar extends Component {
     clicked: false
   }
 
-  // calendarType = weekStartDay => {
-  //   weekStartDay === 0 ? 'US' : 'ISO 8601'
-  // }
-
   onClickDay = date => {
     this.setState({ date: date.toISOString(), clicked: true })
   }

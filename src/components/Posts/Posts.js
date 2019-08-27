@@ -36,28 +36,31 @@ class Posts extends Component {
     }
   }
   render () {
-    const postsJsx = this.state.posts.filter(post =>
-      (post.owner.token === this.props.user.token) && (this.props.location.state.date.substring(0, 10) === post.date.substring(0, 10))).map(post => (
-      <ListGroup.Item key={post._id}>
-        <img src={post.file}/>
-        <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
-        <p>Notes: {post.notes}</p>
-      </ListGroup.Item>
-    ))
+    const { user, location } = this.props
+    const { posts } = this.state
+    const postsArray = posts.filter(post => (post.owner.token === user.token) && (location.state.date.substring(0, 10) === post.date.substring(0, 10)))
 
-    if (this.state.isLoading) {
+    if (posts.isLoading) {
       return (
         <div className="text-center">
           <Spinner animation="border" variant="warning" />
         </div>
       )
+    } else if (postsArray.length !== 0) {
+      return (
+        postsArray.map(post => (
+          <ListGroup.Item key={post._id}>
+            <img src={post.file}/>
+            <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
+            <p>Notes: {post.notes}</p>
+          </ListGroup.Item>
+        ))
+      )
+    } else if (postsArray.length === 0 && !posts.isLoading) {
+      return (
+        <h3>No outfit logged for this day.</h3>
+      )
     }
-
-    return (
-      <ListGroup>
-        {this.state.posts.length ? postsJsx : <ListGroup.Item>No posts found</ListGroup.Item>}
-      </ListGroup>
-    )
   }
 }
 
