@@ -34,38 +34,38 @@ class Post extends Component {
     }
   }
 
-  // delete = async () => {
-  //   try {
-  //     await axios.delete({
-  //       method: 'DELETE',
-  //       url: `${apiUrl}/posts/${this.props.match.params.id}`,
-  //       headers: {
-  //         'Authorization': `Token token=${this.props.user.token}`
-  //       }
-  //     })
-  //     this.setState({ deleted: true })
-  //   } catch (error) {
-  //     this.props.alert({
-  //       heading: 'Error',
-  //       message: 'Something went wrong..',
-  //       variant: 'danger'
-  //     })
-  //   }
-  // }
+  delete = async () => {
+    try {
+      await axios({
+        method: 'DELETE',
+        url: `${apiUrl}/posts/${this.props.match.params.id}`,
+        headers: {
+          'Authorization': `Token token=${this.props.user.token}`
+        }
+      })
+      this.setState({ deleted: true })
+    } catch (error) {
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
+    }
+  }
 
   render () {
     const { post, deleted } = this.state
     let postJsx = ''
 
     if (deleted) {
-      return <Redirect to={
-        {
-          pathname: '/posts',
-          state: {
-            msg: 'Post successfully deleted'
-          }
-        }
-      }/>
+      return <Redirect to={{
+        pathname: '/posts'
+        // this.props.alert({
+        //   heading: 'Error',
+        //   message: 'Something went wrong..',
+        //   variant: 'danger'
+        // })
+      }}/>
     } else if (post) {
       postJsx = (
         <Fragment>
@@ -75,10 +75,6 @@ class Post extends Component {
           <Button href={`#posts/${post._id}/edit`}>Edit Post</Button>
           <Button onClick={this.delete}>Delete Post</Button>
         </Fragment>
-      )
-    } else {
-      postJsx = (
-        'Loading...'
       )
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -8,8 +8,8 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Spinner from 'react-bootstrap/Spinner'
 
 class Posts extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       posts: [],
       isLoading: true
@@ -36,6 +36,7 @@ class Posts extends Component {
   }
 
   render () {
+    console.log(this.props.location.state.date)
     const postsJsx = this.state.posts.filter(post => post.owner.token === this.props.user.token).map(post => (
       <ListGroup.Item key={post._id}>
         <img src={post.file}/>
@@ -60,4 +61,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+export default withRouter(Posts)

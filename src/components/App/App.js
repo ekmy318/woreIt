@@ -109,15 +109,6 @@ class App extends Component {
                 user={user}
                 alert={this.alert} />
             )} />
-
-          <AuthenticatedRoute
-            user={user}
-            exact path='/posts/:date'
-            render={() => (
-              <Post
-                user={user}
-                alert={this.alert} />
-            )} />
         </main>
         {/* <Footer /> */}
       </Fragment>
