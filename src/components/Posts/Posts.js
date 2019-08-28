@@ -51,6 +51,7 @@ class Posts extends Component {
         postsArray.map(post => (
           <ListGroup.Item key={post._id}>
             <img src={post.file}/>
+            <br />
             <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
             <p>Notes: {post.notes}</p>
           </ListGroup.Item>
