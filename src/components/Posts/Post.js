@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Button from 'react-bootstrap/Button'
 import Moment from 'react-moment'
+import Layout from '../Layout/Layout'
 
 class Post extends Component {
   constructor (props) {
@@ -45,6 +46,11 @@ class Post extends Component {
         }
       })
       this.setState({ deleted: true })
+      this.props.alert({
+        heading: 'Success',
+        message: 'Post deleted!',
+        variant: 'success'
+      })
     } catch (error) {
       this.props.alert({
         heading: 'Error',
@@ -59,32 +65,26 @@ class Post extends Component {
     let postJsx = ''
 
     if (deleted) {
-      return <Redirect to={{
-        pathname: '/calendar'
-        // this.props.alert({
-        //   heading: 'Error',
-        //   message: 'Something went wrong..',
-        //   variant: 'danger'
-        // })
-      }}/>
+      return <Redirect to={{ pathname: '/calendar' }}/>
     } else if (post) {
       postJsx = (
-        <Fragment>
+        <div>
           <img src={post.file} />
           <h3><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></h3>
           <p>{post.notes || 'No notes provided'}</p>
           <p>{post.tags || 'No tags provided'}</p>
-          {console.log(post.tags)}
-          <Button href={`#posts/${post._id}/edit`}>Edit Post</Button>
-          <Button onClick={this.delete}>Delete Post</Button>
-        </Fragment>
+          {console.log('tags are:', post.tags)}
+          <Button className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+          <Button className="mt-2 mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
+          <Button className="mt-2" onClick={this.delete}>Delete Post</Button>
+        </div>
       )
     }
 
     return (
-      <div>
+      <Layout md='8' lg='6'>
         {postJsx}
-      </div>
+      </Layout>
     )
   }
 }

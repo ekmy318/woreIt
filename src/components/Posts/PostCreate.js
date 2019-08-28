@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import PostForm from './PostForm'
+import Layout from '../Layout/Layout'
+
 // import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
@@ -11,18 +13,23 @@ class PostCreate extends Component {
       date: '',
       notes: '',
       file: '',
+      tags: [],
       owner: this.props.user
-    }
+    },
+    imageDelete: false,
+    showFileField: true
   }
 
   handleChange = event => {
     this.setState({ post: { ...this.state.post, [event.target.name]: event.target.value } })
-    console.log(event.target.value)
   }
 
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
+    for (const pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1])
+    }
     axios({
       method: 'POST',
       url: `${apiUrl}/posts`,
@@ -49,7 +56,7 @@ class PostCreate extends Component {
   }
 
   render () {
-    const { post } = this.state
+    const { post, showFileField, imageDelete } = this.state
 
     if (!post) {
       return (
@@ -57,13 +64,15 @@ class PostCreate extends Component {
       )
     }
     return (
-      <div>
+      <Layout md="8" lg="6">
         <PostForm
-          post={this.state.post}
+          post={post}
+          imageDelete={imageDelete}
+          showFileField={showFileField}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-      </div>
+      </Layout>
     )
   }
 }

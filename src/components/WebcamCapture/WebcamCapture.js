@@ -1,6 +1,6 @@
 // import React, { Component } from 'react'
 // import Webcam from 'react-webcam'
-// import PostForm from '../Posts/PostForm'
+// import PostFormCreate from '../Posts/PostFormCreate'
 //
 // class WebcamCapture extends Component {
 //   state = {
@@ -47,7 +47,7 @@
 //     const imageObject = {
 //       image_name: this.state.image_name
 //     }
-//     this.props.PostForm(imageObject)
+//     this.props.PostFormCreate(imageObject)
 //   }
 //
 //   render () {

@@ -7,6 +7,8 @@ import apiUrl from '../../apiConfig'
 import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Spinner from 'react-bootstrap/Spinner'
+import Layout from '../Layout/Layout'
+import Button from 'react-bootstrap/Button'
 
 class Posts extends Component {
   constructor (props) {
@@ -39,15 +41,17 @@ class Posts extends Component {
     const { user, location } = this.props
     const { posts } = this.state
     const postsArray = posts.filter(post => (post.owner.token === user.token) && (location.state.date.substring(0, 10) === post.date.substring(0, 10)))
+    let postsJsx = ' '
 
     if (posts.isLoading) {
-      return (
+      postsJsx = (
         <div className="text-center">
+          <Button className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
           <Spinner animation="border" variant="warning" />
         </div>
       )
     } else if (postsArray.length !== 0) {
-      return (
+      postsJsx = (
         postsArray.map(post => (
           <ListGroup.Item key={post._id}>
             <img src={post.file}/>
@@ -58,10 +62,19 @@ class Posts extends Component {
         ))
       )
     } else if (postsArray.length === 0 && !posts.isLoading) {
-      return (
-        <h3>No outfit logged for this day.</h3>
+      postsJsx = (
+        <div>
+          <h3>No outfit logged for this day.</h3>
+          <Button className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+        </div>
       )
     }
+    return (
+      <Layout md='8' lg='6'>
+        <Button className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+        {postsJsx}
+      </Layout>
+    )
   }
 }
 
