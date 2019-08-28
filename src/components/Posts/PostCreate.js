@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import Tags from '../Tags/Tags'
+import PostForm from './PostForm'
 // import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
@@ -58,7 +58,7 @@ class PostCreate extends Component {
     }
     return (
       <div>
-        <Tags
+        <PostForm
           post={this.state.post}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}

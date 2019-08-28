@@ -13,6 +13,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import Home from '../Home/Home'
 import PostCalendar from '../PostCalendar/PostCalendar'
 
+import PostsAll from '../Posts/PostsAll'
 import Posts from '../Posts/Posts'
 import Post from '../Posts/Post'
 import PostCreate from '../Posts/PostCreate'
@@ -65,13 +66,28 @@ class App extends Component {
           )} />
 
           <Route exact path="/" component={Home}/>
+
+          <AuthenticatedRoute
+            user={user}
+            exact path='/postsAll'
+            render={() => (
+              <PostsAll
+                user={user}
+                alert={this.alert} />
+            )} />
+
           <AuthenticatedRoute
             user={user}
             exact path='/calendar'
             render={() => (
-              <PostCalendar
-                user={user}
-                alert={this.alert} />
+              <div>
+                <PostCalendar
+                  user={user}
+                  alert={this.alert} />
+                <PostsAll
+                  user={user}
+                  alert={this.alert} />
+              </div>
             )} />
 
           <AuthenticatedRoute
