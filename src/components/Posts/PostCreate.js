@@ -40,7 +40,6 @@ class PostCreate extends Component {
   }
 
   handleChange = event => {
-    console.log(this.state)
     this.setState({
       post: {
         ...this.state.post,

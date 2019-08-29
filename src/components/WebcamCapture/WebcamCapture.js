@@ -24,7 +24,6 @@ class WebcamCapture extends Component {
 
   capture = () => {
     const imageSrc = this.webcam.getScreenshot()
-    console.log(imageSrc)
     this.setState({ imageData: imageSrc, cameraOn: false, taken: true })
   }
 

@@ -35,7 +35,6 @@ class PostUpdate extends Component {
       })
       this.setState({ post: { ...res.data.post, date: formattedDate } })
       this.setState({ prevImage: this.state.post.file })
-      console.log(this.prevImage)
     } catch (error) {
       this.props.alert({
         heading: 'Error',

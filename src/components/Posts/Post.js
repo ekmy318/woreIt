@@ -30,7 +30,6 @@ class Post extends Component {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
-      console.log(res)
       this.setState({ post: res.data.post })
     } catch (error) {
       this.props.alert({
