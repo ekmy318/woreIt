@@ -49,7 +49,7 @@ class Posts extends Component {
             <br />
             <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
             <p>Notes: {post.notes || 'No notes'}</p>
-            <p>Tags: {post.tags || 'No tags'}</p>
+            <div>Tags: {post.tags.map(tag => <div style={{ padding: '0.5rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div>
           </ListGroup.Item>
         ))
       )

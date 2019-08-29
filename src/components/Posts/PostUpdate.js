@@ -4,12 +4,19 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import PostForm from './PostForm'
 import Layout from '../Layout/Layout'
+import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostUpdate extends Component {
   state = {
-    post: null,
+    post: {
+      date: '2019-08-01',
+      notes: '',
+      file: '',
+      tags: []
+    },
     imageDelete: false,
-    showFileField: false
+    showFileField: false,
+    prevImage: ''
   }
 
   async componentDidMount () {
@@ -24,6 +31,8 @@ class PostUpdate extends Component {
       const dateObj = new Date(res.data.post.date)
       const formattedDate = dateObj.toISOString().substring(0, 10)
       this.setState({ post: { ...res.data.post, date: formattedDate } })
+      this.setState({ prevImage: this.state.post.file })
+      console.log(this.prevImage)
     } catch (error) {
       this.props.alert({
         heading: 'Error',
@@ -33,9 +42,24 @@ class PostUpdate extends Component {
     }
   }
 
+  handleDelete = i => {
+    const { tags } = this.state.post
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i)
+    })
+  }
+
+  handleAddition = tag => {
+    this.setState({
+      post: {
+        ...this.state.post,
+        tags: [...this.state.post.tags, tag]
+      }
+    })
+  }
+
   handleChange = event => {
     this.setState({ post: { ...this.state.post, [event.target.name]: event.target.value, file: '' } })
-    console.log(event.target.file)
   }
 
   deleteImageButton = event => {
@@ -47,6 +71,7 @@ class PostUpdate extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
+    formData.append('tags', JSON.stringify(this.state.post.tags))
     axios({
       method: 'PATCH',
       url: `${apiUrl}/posts/${this.state.post._id}`,
@@ -68,7 +93,7 @@ class PostUpdate extends Component {
   }
 
   render () {
-    const { post, showFileField } = this.state
+    const { post, showFileField, prevImage } = this.state
 
     if (!post) {
       return (
@@ -77,12 +102,17 @@ class PostUpdate extends Component {
     }
     return (
       <Layout md="8" lg="6">
+        <WebcamCapture />
         <PostForm
           post={post}
+          prevImage={prevImage}
           showFileField={showFileField}
           deleteImageButton={this.deleteImageButton}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
+          handleDelete={this.handleDelete}
+          handleAddition={this.handleAddition}
+          allowDragDrop={false}
         />
       </Layout>
     )

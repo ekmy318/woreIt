@@ -1,14 +1,14 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Tags from '../Tags/Tags'
+import { WithContext as ReactTags } from 'react-tag-input'
 
-const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton, tags }) => {
+const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton, handleAddition, handleDelete, prevImage }) => {
   const cancelpath = post._id ? `#posts/${post._id}` : '#calendar'
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="file" encType="multipart/form-data">
-        {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file}/> : ''}
+        {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/> : ''}
         {showFileField && <Form.Control name="file" type="file" className="inputfile" required onChange={handleChange} />}
       </Form.Group>
       {post._id && <Button variant="outline-dark" className="mb-3" onClick={deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>}
@@ -25,7 +25,7 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
 
       <Form.Group controlId="tags">
         <p>Save a tag with your post!</p>
-        <Tags value={tags} name="tags"
+        <ReactTags tags={post.tags} handleAddition={handleAddition} handleDelete={handleDelete}
         />
       </Form.Group>
 

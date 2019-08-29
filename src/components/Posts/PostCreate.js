@@ -5,7 +5,6 @@ import apiUrl from '../../apiConfig'
 import PostForm from './PostForm'
 import Layout from '../Layout/Layout'
 import './Tags.css'
-import { WithContext as ReactTags } from 'react-tag-input'
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
@@ -14,10 +13,10 @@ class PostCreate extends Component {
 
     this.state = {
       post: {
-        date: '',
+        date: '2019-08-01',
         notes: '',
         file: '',
-        tags: ''
+        tags: []
       },
       imageDelete: false,
       showFileField: true
@@ -32,25 +31,28 @@ class PostCreate extends Component {
   }
 
   handleAddition = tag => {
-    this.setState(state => ({ tags: [...state.post.tags, tag] }))
-  }
-
-  handleTagClick = index => {
-    console.log('The tag at index ' + index + ' was clicked')
+    this.setState({
+      post: {
+        ...this.state.post,
+        tags: [...this.state.post.tags, tag]
+      }
+    })
   }
 
   handleChange = event => {
-    this.setState({ post: { ...this.state.post, [event.target.name]: event.target.value } })
+    console.log(this.state)
+    this.setState({
+      post: {
+        ...this.state.post,
+        [event.target.name]: event.target.value
+      }
+    })
   }
 
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
-    console.log('this is event.target:', event.target)
-    formData.append('tags', this.state.post.tags)
-    for (const pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1])
-    }
+    formData.append('tags', JSON.stringify(this.state.post.tags))
     axios({
       method: 'POST',
       url: `${apiUrl}/posts`,
@@ -92,13 +94,9 @@ class PostCreate extends Component {
           showFileField={showFileField}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-        />
-        <ReactTags
-          tags={this.state.tags}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
           allowDragDrop={false}
-          handleTagClick={this.handleTagClick}
         />
       </Layout>
     )
