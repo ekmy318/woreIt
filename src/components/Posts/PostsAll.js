@@ -7,6 +7,7 @@ import apiUrl from '../../apiConfig'
 import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Layout from '../Layout/Layout'
+import './Posts.css'
 
 class PostsAll extends Component {
   constructor (props) {
@@ -50,7 +51,7 @@ class PostsAll extends Component {
       )
     }
     return (
-      <Layout md='12' lg='12'>
+      <Layout md='4' lg='6' className="postsAll">
         {postsJsx}
       </Layout>
     )

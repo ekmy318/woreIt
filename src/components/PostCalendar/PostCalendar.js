@@ -3,6 +3,8 @@ import Calendar from 'react-calendar'
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 
+import './PostCalendar.css'
+
 class PostCalendar extends Component {
   state = {
     date: null,
@@ -23,6 +25,7 @@ class PostCalendar extends Component {
     return (
       <div>
         <Calendar
+          className="calendar"
           onClickDay={this.onClickDay}
           value={this.state.date}
           locale= 'en-US'

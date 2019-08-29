@@ -6,8 +6,7 @@ import PostForm from './PostForm'
 import Layout from '../Layout/Layout'
 import './Tags.css'
 import { WithContext as ReactTags } from 'react-tag-input'
-
-// import WebcamCapture from '../WebcamCapture/WebcamCapture'
+import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
   constructor (props) {
@@ -47,6 +46,7 @@ class PostCreate extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
+    console.log('this is event.target:', event.target)
     formData.append('tags', this.state.post.tags)
     for (const pair of formData.entries()) {
       console.log(pair[0] + ', ' + pair[1])
@@ -82,6 +82,7 @@ class PostCreate extends Component {
     }
     return (
       <Layout md="8" lg="6">
+        <WebcamCapture />
         <PostForm
           post={post}
           imageDelete={imageDelete}

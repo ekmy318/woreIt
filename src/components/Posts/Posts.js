@@ -58,7 +58,7 @@ class Posts extends Component {
     }
     return (
       <Layout md='8' lg='6'>
-        <Button className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+        <Button variant="dark" className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
         {postsJsx}
       </Layout>
     )

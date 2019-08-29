@@ -3,9 +3,13 @@ import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
-import Button from 'react-bootstrap/Button'
 import Moment from 'react-moment'
 import Layout from '../Layout/Layout'
+
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
 
 class Post extends Component {
   constructor (props) {
@@ -57,14 +61,21 @@ class Post extends Component {
     } else if (post) {
       postJsx = (
         <div>
-          <img src={post.file} />
-          <h3><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></h3>
-          <p>{post.notes || 'No notes provided'}</p>
-          <p>{post.tags || 'No tags provided'}</p>
-          {console.log('tags are:', post.tags)}
-          <Button className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
-          <Button className="mt-2 mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
-          <Button className="mt-2" onClick={this.delete}>Delete Post</Button>
+          <Button variant="dark" className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+          <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={post.file} />
+            <Card.Body>
+              <Card.Title><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Card.Title>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>{post.notes || 'No notes provided'}</ListGroupItem>
+              <ListGroupItem>{post.tags || 'No tags provided'}</ListGroupItem>
+            </ListGroup>
+            <Card.Body>
+              <Button variant="primary" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
+              <Button variant="outline-danger" className="mt-2" onClick={this.delete}>Delete Post</Button>
+            </Card.Body>
+          </Card>
         </div>
       )
     }

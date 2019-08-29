@@ -1,0 +1,10 @@
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.webcam {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -9,9 +9,9 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="file" encType="multipart/form-data">
         {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file}/> : <Form.Label>Upload a picture!</Form.Label>}
-        {showFileField && <Form.Control name="file" type="file" required onChange={handleChange} />}
+        {showFileField && <Form.Control name="file" type="file" className="inputfile" required onChange={handleChange} />}
       </Form.Group>
-      {post._id && <Button className="mb-3" onClick={deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>}
+      {post._id && <Button variant="outline-dark" className="mb-3" onClick={deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>}
 
       <Form.Group controlId="date">
         <Form.Label>Date</Form.Label>
@@ -29,10 +29,10 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
         />
       </Form.Group>
 
-      <Button className="mb-2" variant="primary" type="submit">
+      <Button className="mb-3" variant="primary" type="submit">
         Submit
       </Button>
-      <Button variant="danger" href={cancelpath} className="ml-2 mb-3">Cancel</Button>
+      <Button variant="outline-danger" href={cancelpath} className="ml-2 mb-3">Cancel</Button>
     </Form>
   )
 }

@@ -1,0 +1,11 @@
+.postsAll {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: scroll;
+  text-align: center;
+}
+
+.inputfile {
+  cursor: pointer;
+}
