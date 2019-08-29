@@ -30,6 +30,9 @@ class PostUpdate extends Component {
       })
       const dateObj = new Date(res.data.post.date)
       const formattedDate = dateObj.toISOString().substring(0, 10)
+      res.data.post.tags = res.data.post.tags.map((tag, i) => {
+        return { id: tag, text: tag }
+      })
       this.setState({ post: { ...res.data.post, date: formattedDate } })
       this.setState({ prevImage: this.state.post.file })
       console.log(this.prevImage)

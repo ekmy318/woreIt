@@ -25,7 +25,7 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
 
       <Form.Group controlId="tags">
         <p>Save a tag with your post!</p>
-        <ReactTags tags={post.tags} handleAddition={handleAddition} handleDelete={handleDelete}
+        <ReactTags tags={post.tags} handleAddition={handleAddition} handleDelete={handleDelete} allowDragDrop={false}
         />
       </Form.Group>
 
