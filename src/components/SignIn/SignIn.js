@@ -35,6 +35,7 @@ class SignIn extends Component {
       }))
       .then(() => history.push('/calendar'))
       .catch(error => {
+        console.error(error)
         this.setState({ email: '', password: '' })
         alert({
           heading: 'Sign In Failed',
