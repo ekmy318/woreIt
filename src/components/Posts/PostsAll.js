@@ -6,14 +6,13 @@ import apiUrl from '../../apiConfig'
 
 import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
-import Spinner from 'react-bootstrap/Spinner'
+import Layout from '../Layout/Layout'
 
 class PostsAll extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      posts: [],
-      isLoading: true
+      posts: []
     }
   }
 
@@ -26,29 +25,19 @@ class PostsAll extends Component {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
-      this.setState({ posts: res.data.posts, isLoading: false })
+      const ownedPosts = res.data.posts.filter(post => (post.owner.token === this.props.user.token))
+      this.setState({ posts: ownedPosts })
     } catch (error) {
-      this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
-        variant: 'danger'
-      })
+      this.props.alert('Error', 'Something went wrong..', 'danger')
     }
   }
   render () {
     const { posts } = this.state
-    const { user } = this.props
-    const postsArray = posts.filter(post => (post.owner.token === user.token))
+    let postsJsx = ' '
 
-    if (posts.isLoading) {
-      return (
-        <div className="text-center">
-          <Spinner animation="border" variant="warning" />
-        </div>
-      )
-    } else if (posts.length !== 0) {
-      return (
-        postsArray.map(post => (
+    if (posts.length > 0) {
+      postsJsx = (
+        posts.map(post => (
           <ListGroup.Item key={post._id}>
             <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
             <p>Notes: {post.notes}</p>
@@ -56,10 +45,15 @@ class PostsAll extends Component {
         ))
       )
     } else {
-      return (
-        <h3>No outfit logged for this day.</h3>
+      postsJsx = (
+        <h3>No outfit logged.</h3>
       )
     }
+    return (
+      <Layout md='12' lg='12'>
+        {postsJsx}
+      </Layout>
+    )
   }
 }
 

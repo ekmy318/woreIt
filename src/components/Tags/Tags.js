@@ -10,38 +10,32 @@ class Tags extends Component {
     this.state = {
       tags: []
     }
-
-    this.handleDelete = this.handleDelete.bind(this)
-    this.handleAddition = this.handleAddition.bind(this)
-    this.handleTagClick = this.handleTagClick.bind(this)
   }
 
-  handleDelete (i) {
+  handleDelete = i => {
     const { tags } = this.state
     this.setState({
       tags: tags.filter((tag, index) => index !== i)
     })
   }
 
-  handleAddition (tag) {
+  handleAddition = tag => {
     this.setState(state => ({ tags: [...state.tags, tag] }))
   }
 
-  handleTagClick (index) {
+  handleTagClick = index => {
     console.log('The tag at index ' + index + ' was clicked')
   }
 
   render () {
-    const { tags } = this.state
     return (
       <div>
         <ReactTags
-          tags={tags}
+          tags={this.state.tags}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
           allowDragDrop={false}
           handleTagClick={this.handleTagClick}
-          name={this.name}
         />
       </div>
     )

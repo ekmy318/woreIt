@@ -3,13 +3,10 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Tags from '../Tags/Tags'
 
-const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton }) => {
+const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton, tags }) => {
   const cancelpath = post._id ? `#posts/${post._id}` : '#calendar'
-
-  console.log(post.file)
   return (
     <Form onSubmit={handleSubmit}>
-
       <Form.Group controlId="file" encType="multipart/form-data">
         {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file}/> : <Form.Label>Upload a picture!</Form.Label>}
         {showFileField && <Form.Control name="file" type="file" required onChange={handleChange} />}
@@ -27,14 +24,15 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
       </Form.Group>
 
       <Form.Group controlId="tags">
-        <Form.Label>Tags</Form.Label>
-        <Tags type="text" value={post.tags} name="tags" onChange={handleChange} />
+        <p>Save a tag with your post!</p>
+        <Tags value={tags} name="tags"
+        />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button className="mb-2" variant="primary" type="submit">
         Submit
       </Button>
-      <Button variant="danger" href={cancelpath} className="ml-2"><i className="icofont-arrow-left" /> Cancel</Button>
+      <Button variant="danger" href={cancelpath} className="ml-2 mb-3">Cancel</Button>
     </Form>
   )
 }

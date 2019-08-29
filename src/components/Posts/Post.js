@@ -28,11 +28,7 @@ class Post extends Component {
       })
       this.setState({ post: res.data.post })
     } catch (error) {
-      this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
-        variant: 'danger'
-      })
+      this.props.alert('Error', 'Something went wrong..', 'danger')
     }
   }
 
@@ -46,17 +42,9 @@ class Post extends Component {
         }
       })
       this.setState({ deleted: true })
-      this.props.alert({
-        heading: 'Success',
-        message: 'Post deleted!',
-        variant: 'success'
-      })
+      this.props.alert('Success', 'Post deleted!', 'success')
     } catch (error) {
-      this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
-        variant: 'danger'
-      })
+      this.props.alert('Error', 'Something went wrong..', 'danger')
     }
   }
 

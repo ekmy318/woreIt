@@ -6,7 +6,6 @@ import apiUrl from '../../apiConfig'
 
 import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
-import Spinner from 'react-bootstrap/Spinner'
 import Layout from '../Layout/Layout'
 import Button from 'react-bootstrap/Button'
 
@@ -14,8 +13,7 @@ class Posts extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      posts: [],
-      isLoading: true
+      posts: []
     }
   }
 
@@ -28,44 +26,33 @@ class Posts extends Component {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
-      this.setState({ posts: res.data.posts, isLoading: false })
+      const ownedPosts = res.data.posts.filter(post => (post.owner.token === this.props.user.token) && (this.props.location.state.date.substring(0, 10) === post.date.substring(0, 10)))
+      this.setState({ posts: ownedPosts })
     } catch (error) {
-      this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
-        variant: 'danger'
-      })
+      this.props.alert('Error', 'Something went wrong..', 'danger')
     }
   }
   render () {
-    const { user, location } = this.props
     const { posts } = this.state
-    const postsArray = posts.filter(post => (post.owner.token === user.token) && (location.state.date.substring(0, 10) === post.date.substring(0, 10)))
+
     let postsJsx = ' '
 
-    if (posts.isLoading) {
+    if (posts.length > 0) {
       postsJsx = (
-        <div className="text-center">
-          <Button className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
-          <Spinner animation="border" variant="warning" />
-        </div>
-      )
-    } else if (postsArray.length !== 0) {
-      postsJsx = (
-        postsArray.map(post => (
+        posts.map(post => (
           <ListGroup.Item key={post._id}>
             <img src={post.file}/>
             <br />
             <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
-            <p>Notes: {post.notes}</p>
+            <p>Notes: {post.notes || 'No notes'}</p>
+            <p>Tags: {post.tags || 'No tags'}</p>
           </ListGroup.Item>
         ))
       )
-    } else if (postsArray.length === 0 && !posts.isLoading) {
+    } else {
       postsJsx = (
         <div>
           <h3>No outfit logged for this day.</h3>
-          <Button className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
         </div>
       )
     }

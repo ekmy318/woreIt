@@ -25,11 +25,7 @@ class PostUpdate extends Component {
       const formattedDate = dateObj.toISOString().substring(0, 10)
       this.setState({ post: { ...res.data.post, date: formattedDate } })
     } catch (error) {
-      this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
-        variant: 'danger'
-      })
+      this.props.alert('Error', 'Something went wrong..', 'danger')
     }
   }
 
@@ -47,9 +43,6 @@ class PostUpdate extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
-    for (const pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1])
-    }
     axios({
       method: 'PATCH',
       url: `${apiUrl}/posts/${this.state.post._id}`,

@@ -4,40 +4,20 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import PostForm from './PostForm'
 import Layout from '../Layout/Layout'
-import './Tags.css'
-import { WithContext as ReactTags } from 'react-tag-input'
 
 // import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      post: {
-        date: '',
-        notes: '',
-        file: '',
-        tags: ''
-      },
-      imageDelete: false,
-      showFileField: true
-    }
-  }
-
-  handleDelete = i => {
-    const { tags } = this.state.post
-    this.setState({
-      tags: tags.filter((tag, index) => index !== i)
-    })
-  }
-
-  handleAddition = tag => {
-    this.setState(state => ({ tags: [...state.post.tags, tag] }))
-  }
-
-  handleTagClick = index => {
-    console.log('The tag at index ' + index + ' was clicked')
+  state = {
+    post: {
+      date: '',
+      notes: '',
+      file: '',
+      tags: [],
+      owner: this.props.user
+    },
+    imageDelete: false,
+    showFileField: true
   }
 
   handleChange = event => {
@@ -47,7 +27,6 @@ class PostCreate extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
-    formData.append('tags', this.state.post.tags)
     for (const pair of formData.entries()) {
       console.log(pair[0] + ', ' + pair[1])
     }
@@ -59,10 +38,6 @@ class PostCreate extends Component {
       },
       data: formData
     })
-      .then(res => {
-        console.log(res)
-        return res
-      })
       .then(res => {
         this.props.alert('Success!', 'You made a post!', 'success')
         this.props.history.push(`/posts/${res.data.post._id}`)
@@ -88,13 +63,6 @@ class PostCreate extends Component {
           showFileField={showFileField}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-        />
-        <ReactTags
-          tags={this.state.tags}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          allowDragDrop={false}
-          handleTagClick={this.handleTagClick}
         />
       </Layout>
     )
