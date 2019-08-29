@@ -29,7 +29,11 @@ class PostsAll extends Component {
       const ownedPosts = res.data.posts.filter(post => (post.owner.token === this.props.user.token))
       this.setState({ posts: ownedPosts })
     } catch (error) {
-      this.props.alert('Error', 'Something went wrong..', 'danger')
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
     }
   }
   render () {
@@ -47,7 +51,7 @@ class PostsAll extends Component {
       )
     } else {
       postsJsx = (
-        <h3>No outfit logged.</h3>
+        <h3>No outfits logged.</h3>
       )
     }
     return (

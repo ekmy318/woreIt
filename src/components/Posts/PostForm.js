@@ -8,7 +8,7 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="file" encType="multipart/form-data">
-        {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file}/> : <Form.Label>Upload a picture!</Form.Label>}
+        {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file}/> : ''}
         {showFileField && <Form.Control name="file" type="file" className="inputfile" required onChange={handleChange} />}
       </Form.Group>
       {post._id && <Button variant="outline-dark" className="mb-3" onClick={deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>}

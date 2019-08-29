@@ -25,7 +25,11 @@ class PostUpdate extends Component {
       const formattedDate = dateObj.toISOString().substring(0, 10)
       this.setState({ post: { ...res.data.post, date: formattedDate } })
     } catch (error) {
-      this.props.alert('Error', 'Something went wrong..', 'danger')
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
     }
   }
 
@@ -52,8 +56,15 @@ class PostUpdate extends Component {
       data: formData
     })
       .then(() => this.props.history.push(`/posts/${this.state.post._id}`))
-      .then(() => this.props.alert('Success!', 'You updated the post!', 'success'))
-      .catch(() => this.props.alert('Error', 'Failed to create a post', 'danger'))
+      .then(() => this.props.alert({
+        heading: 'Post updated!',
+        variant: 'success'
+      }))
+      .catch(() => this.props.alert({
+        heading: 'Error',
+        message: 'Failed to create a post',
+        variant: 'danger'
+      }))
   }
 
   render () {

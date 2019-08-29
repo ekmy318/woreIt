@@ -39,11 +39,18 @@ class PostCreate extends Component {
       data: formData
     })
       .then(res => {
-        this.props.alert('Success!', 'You made a post!', 'success')
+        this.props.alert({
+          heading: 'Looking good!',
+          variant: 'success'
+        })
         this.props.history.push(`/posts/${res.data.post._id}`)
       })
       .catch(res => {
-        this.props.alert('Error', 'Something went wrong..', 'danger')
+        this.props.alert({
+          heading: 'Error',
+          message: 'Something went wrong..',
+          variant: 'danger'
+        })
       })
   }
 

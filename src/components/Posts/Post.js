@@ -32,7 +32,10 @@ class Post extends Component {
       })
       this.setState({ post: res.data.post })
     } catch (error) {
-      this.props.alert('Error', 'Something went wrong..', 'danger')
+      this.props.alert({
+        heading: 'Something went wrong..',
+        variant: 'danger'
+      })
     }
   }
 
@@ -46,9 +49,15 @@ class Post extends Component {
         }
       })
       this.setState({ deleted: true })
-      this.props.alert('Success', 'Post deleted!', 'success')
+      this.props.alert({
+        heading: 'Post deleted!',
+        variant: 'success'
+      })
     } catch (error) {
-      this.props.alert('Error', 'Something went wrong..', 'danger')
+      this.props.alert({
+        heading: 'Something went wrong..',
+        variant: 'danger'
+      })
     }
   }
 
@@ -61,7 +70,7 @@ class Post extends Component {
     } else if (post) {
       postJsx = (
         <div>
-          <Button variant="dark" className="mt-2 mr-5" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+          <Button variant="dark" className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
           <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={post.file} />
             <Card.Body>
@@ -73,7 +82,7 @@ class Post extends Component {
             </ListGroup>
             <Card.Body>
               <Button variant="primary" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
-              <Button variant="outline-danger" className="mt-2" onClick={this.delete}>Delete Post</Button>
+              <Button variant="outline-danger" onClick={this.delete}>Delete Post</Button>
             </Card.Body>
           </Card>
         </div>

@@ -29,7 +29,11 @@ class Posts extends Component {
       const ownedPosts = res.data.posts.filter(post => (post.owner.token === this.props.user.token) && (this.props.location.state.date.substring(0, 10) === post.date.substring(0, 10)))
       this.setState({ posts: ownedPosts })
     } catch (error) {
-      this.props.alert('Error', 'Something went wrong..', 'danger')
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
     }
   }
   render () {
