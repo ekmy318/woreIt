@@ -66,6 +66,26 @@ class PostsAll extends Component {
     }
   }
 
+  handleClear = async () => {
+    try {
+      const res = await axios({
+        method: 'GET',
+        url: `${apiUrl}/posts`,
+        headers: {
+          'Authorization': `Token token=${this.props.user.token}`
+        }
+      })
+      const ownedTag = res.data.posts.filter(post => (post.owner.token === this.props.user.token))
+      this.setState({ posts: ownedTag })
+    } catch (error) {
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
+    }
+  }
+
   render () {
     const { posts } = this.state
     let postsJsx = ' '
@@ -89,7 +109,8 @@ class PostsAll extends Component {
       <Layout md='4' lg='6' className="postsAll">
         <Form inline>
           <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onChange={this.handleChange} />
-          <Button variant="outline-dark" onClick={this.handleSubmit}>Search</Button>
+          <Button variant="outline-dark" onClick={this.handleSubmit} className="mr-2">Search</Button>
+          <Button variant="dark" onClick={this.handleClear}>Clear Search</Button>
         </Form>
         {postsJsx}
       </Layout>
