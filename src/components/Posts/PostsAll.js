@@ -78,7 +78,7 @@ class PostsAll extends Component {
             <p>Notes: {post.notes}</p>
             <div>Tags: {post.tags.map(tag => <div style={{ padding: '0.25rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div>
           </ListGroup.Item>
-        ))
+        )).reverse()
       )
     } else {
       postsJsx = (

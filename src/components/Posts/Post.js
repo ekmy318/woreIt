@@ -71,7 +71,7 @@ class Post extends Component {
       postJsx = (
         <div>
           <Button variant="dark" className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
-          <Card style={{ width: '18rem' }}>
+          <Card style={{ width: '34rem' }}>
             <Card.Img variant="top" src={post.file} />
             <Card.Body>
               <Card.Title><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Card.Title>
