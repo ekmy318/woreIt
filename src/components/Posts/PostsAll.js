@@ -55,7 +55,7 @@ class PostsAll extends Component {
           'Authorization': `Token token=${this.props.user.token}`
         }
       })
-      const ownedTag = res.data.posts.filter(post => (post.owner.token === this.props.user.token)).filter(post => post.tags.includes(this.state.filteredWord))
+      const ownedTag = res.data.posts.filter(post => (post.owner.token === this.props.user.token)).filter(post => post.tags.includes(this.state.filteredWord.toLowerCase() || this.state.filteredWord.toUpperCase()))
       this.setState({ posts: ownedTag })
     } catch (error) {
       this.props.alert({
