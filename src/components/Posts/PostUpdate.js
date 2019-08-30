@@ -7,16 +7,20 @@ import Layout from '../Layout/Layout'
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostUpdate extends Component {
-  state = {
-    post: {
-      date: '2019-08-01',
-      notes: '',
-      file: '',
-      tags: []
-    },
-    imageDelete: false,
-    showFileField: false,
-    prevImage: ''
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      post: {
+        date: '',
+        notes: '',
+        file: '',
+        tags: []
+      },
+      imageDelete: false,
+      showFileField: false,
+      prevImage: ''
+    }
   }
 
   async componentDidMount () {
@@ -45,9 +49,11 @@ class PostUpdate extends Component {
   }
 
   handleDelete = i => {
-    const { tags } = this.state.post
     this.setState({
-      tags: tags.filter((tag, index) => index !== i)
+      post: {
+        ...this.state.post,
+        tags: this.state.post.tags.filter((tag, index) => index !== i)
+      }
     })
   }
 

@@ -13,7 +13,7 @@ class PostCreate extends Component {
 
     this.state = {
       post: {
-        date: '2019-08-01',
+        date: '',
         notes: '',
         file: '',
         tags: []
@@ -24,9 +24,11 @@ class PostCreate extends Component {
   }
 
   handleDelete = i => {
-    const { tags } = this.state.post
     this.setState({
-      tags: tags.filter((tag, index) => index !== i)
+      post: {
+        ...this.state.post,
+        tags: this.state.post.tags.filter((tag, index) => index !== i)
+      }
     })
   }
 
