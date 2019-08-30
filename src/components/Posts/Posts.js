@@ -6,8 +6,10 @@ import apiUrl from '../../apiConfig'
 
 import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Layout from '../Layout/Layout'
 import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
 
 class Posts extends Component {
   constructor (props) {
@@ -44,13 +46,20 @@ class Posts extends Component {
     if (posts.length > 0) {
       postsJsx = (
         posts.map(post => (
-          <ListGroup.Item key={post._id}>
-            <img src={post.file}/>
-            <br />
-            <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
-            <p>Notes: {post.notes || 'No notes'}</p>
-            <div>Tags: {post.tags.map(tag => <div style={{ padding: '0.5rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div>
-          </ListGroup.Item>
+          <Card key={post._id} style={{ width: '34rem' }} className="col">
+            <Card.Img variant="top" src={post.file} />
+            <Card.Body>
+              <Card.Title><Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link></Card.Title>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>{post.notes || 'No notes provided'}</ListGroupItem>
+              <ListGroupItem><div>Tags: {post.tags.map(tag => <div style={{ padding: '0.5rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div></ListGroupItem>
+            </ListGroup>
+            <Card.Body>
+              <Button variant="primary" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
+              <Button variant="outline-danger" onClick={this.delete}>Delete Post</Button>
+            </Card.Body>
+          </Card>
         ))
       )
     } else {

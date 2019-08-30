@@ -76,6 +76,7 @@ class PostsAll extends Component {
           <ListGroup.Item key={post._id}>
             <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
             <p>Notes: {post.notes}</p>
+            <div>Tags: {post.tags.map(tag => <div style={{ padding: '0.25rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div>
           </ListGroup.Item>
         ))
       )

@@ -51,10 +51,6 @@ class PostUpdate extends Component {
     })
   }
 
-  handleTagClick = (index) => {
-    console.log('The tag at index ' + index + ' was clicked')
-  }
-
   handleAddition = tag => {
     this.setState({
       post: {
