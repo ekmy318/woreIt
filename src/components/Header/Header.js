@@ -18,7 +18,7 @@ const unauthenticatedOptions = (
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="dark" variant="dark" expand="md">
+  <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
     <Navbar.Brand href="">
       Defeat Repeat
     </Navbar.Brand>
