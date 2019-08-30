@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { WithContext as ReactTags } from 'react-tag-input'
 
-const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton, handleAddition, handleDelete, prevImage }) => {
+const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton, handleAddition, handleDelete, prevImage, handleTagClick }) => {
   const cancelpath = post._id ? `#posts/${post._id}` : '#calendar'
   return (
     <Form onSubmit={handleSubmit}>
@@ -25,7 +25,7 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
 
       <Form.Group controlId="tags">
         <p>Save a tag with your post!</p>
-        <ReactTags tags={post.tags} handleAddition={handleAddition} handleDelete={handleDelete} allowDragDrop={false}
+        <ReactTags tags={post.tags} handleAddition={handleAddition} handleDelete={handleDelete} handleTagClick={handleTagClick} allowDragDrop={false}
         />
       </Form.Group>
 

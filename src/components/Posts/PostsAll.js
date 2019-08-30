@@ -6,6 +6,10 @@ import apiUrl from '../../apiConfig'
 
 import Moment from 'react-moment'
 import ListGroup from 'react-bootstrap/ListGroup'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
+import Button from 'react-bootstrap/Button'
+
 import Layout from '../Layout/Layout'
 import './Posts.css'
 
@@ -13,7 +17,8 @@ class PostsAll extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      posts: []
+      posts: [],
+      filteredWord: null
     }
   }
 
@@ -36,6 +41,31 @@ class PostsAll extends Component {
       })
     }
   }
+
+  handleChange = event => {
+    this.setState({ filteredWord: event.target.value })
+  }
+
+  handleSubmit = async () => {
+    try {
+      const res = await axios({
+        method: 'GET',
+        url: `${apiUrl}/posts`,
+        headers: {
+          'Authorization': `Token token=${this.props.user.token}`
+        }
+      })
+      const ownedTag = res.data.posts.filter(post => (post.owner.token === this.props.user.token)).filter(post => post.tags.includes(this.state.filteredWord))
+      this.setState({ posts: ownedTag })
+    } catch (error) {
+      this.props.alert({
+        heading: 'Error',
+        message: 'Something went wrong..',
+        variant: 'danger'
+      })
+    }
+  }
+
   render () {
     const { posts } = this.state
     let postsJsx = ' '
@@ -56,6 +86,10 @@ class PostsAll extends Component {
     }
     return (
       <Layout md='4' lg='6' className="postsAll">
+        <Form inline>
+          <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onChange={this.handleChange} />
+          <Button variant="outline-dark" onClick={this.handleSubmit}>Search</Button>
+        </Form>
         {postsJsx}
       </Layout>
     )

@@ -51,6 +51,10 @@ class PostUpdate extends Component {
     })
   }
 
+  handleTagClick = (index) => {
+    console.log('The tag at index ' + index + ' was clicked')
+  }
+
   handleAddition = tag => {
     this.setState({
       post: {
@@ -114,6 +118,7 @@ class PostUpdate extends Component {
           handleSubmit={this.handleSubmit}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
+          handleTagClick={this.handleTagClick}
           allowDragDrop={false}
         />
       </Layout>
