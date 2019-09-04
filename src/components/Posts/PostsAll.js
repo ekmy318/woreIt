@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-
 import axios from 'axios'
+import Moment from 'react-moment'
+
 import apiUrl from '../../apiConfig'
 
-import Moment from 'react-moment'
-import ListGroup from 'react-bootstrap/ListGroup'
+import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+import ListGroup from 'react-bootstrap/ListGroup'
 
 import Layout from '../Layout/Layout'
 import './Posts.css'
@@ -35,8 +35,7 @@ class PostsAll extends Component {
       this.setState({ posts: ownedPosts })
     } catch (error) {
       this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
+        heading: 'Something went wrong..',
         variant: 'danger'
       })
     }
@@ -59,8 +58,7 @@ class PostsAll extends Component {
       this.setState({ posts: ownedTag })
     } catch (error) {
       this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
+        heading: 'Something went wrong..',
         variant: 'danger'
       })
     }
@@ -79,8 +77,7 @@ class PostsAll extends Component {
       this.setState({ posts: ownedTag })
     } catch (error) {
       this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
+        heading: 'Something went wrong..',
         variant: 'danger'
       })
     }

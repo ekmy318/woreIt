@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
+
 import apiUrl from '../../apiConfig'
+import './Tags.css'
 import PostForm from './PostForm'
 import Layout from '../Layout/Layout'
-import './Tags.css'
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
@@ -71,8 +72,7 @@ class PostCreate extends Component {
       })
       .catch(res => {
         this.props.alert({
-          heading: 'Error',
-          message: 'Something went wrong..',
+          heading: 'Something went wrong..',
           variant: 'danger'
         })
       })

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import apiUrl from '../../apiConfig'
 import Moment from 'react-moment'
+
+import apiUrl from '../../apiConfig'
 import Layout from '../Layout/Layout'
 
 import Button from 'react-bootstrap/Button'

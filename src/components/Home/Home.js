@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+
 import Button from 'react-bootstrap/Button'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 class Home extends Component {
   render () {

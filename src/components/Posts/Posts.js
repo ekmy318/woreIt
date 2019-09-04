@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-
 import axios from 'axios'
+import Moment from 'react-moment'
+
 import apiUrl from '../../apiConfig'
 
-import Moment from 'react-moment'
-import ListGroup from 'react-bootstrap/ListGroup'
-import ListGroupItem from 'react-bootstrap/ListGroupItem'
-import Layout from '../Layout/Layout'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
+import Layout from '../Layout/Layout'
+import ListGroup from 'react-bootstrap/ListGroup'
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
 
 class Posts extends Component {
   constructor (props) {
@@ -32,8 +32,7 @@ class Posts extends Component {
       this.setState({ posts: ownedPosts })
     } catch (error) {
       this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
+        heading: 'Something went wrong..',
         variant: 'danger'
       })
     }

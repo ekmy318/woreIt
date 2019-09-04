@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
+
 import apiUrl from '../../apiConfig'
-import PostForm from './PostForm'
 import Layout from '../Layout/Layout'
+import PostForm from './PostForm'
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostUpdate extends Component {
@@ -41,8 +42,7 @@ class PostUpdate extends Component {
       this.setState({ prevImage: this.state.post.file })
     } catch (error) {
       this.props.alert({
-        heading: 'Error',
-        message: 'Something went wrong..',
+        heading: 'Something went wrong..',
         variant: 'danger'
       })
     }
@@ -94,8 +94,7 @@ class PostUpdate extends Component {
         variant: 'success'
       }))
       .catch(() => this.props.alert({
-        heading: 'Error',
-        message: 'Failed to create a post',
+        heading: 'Failed to create a post',
         variant: 'danger'
       }))
   }
