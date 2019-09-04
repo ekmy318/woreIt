@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Calendar from 'react-calendar'
+import ReactCalendar from 'react-calendar'
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 
-import './PostCalendar.css'
+import './Calendar.css'
 
-class PostCalendar extends Component {
+class Calendar extends Component {
   state = {
     date: null,
     clicked: false
@@ -24,7 +24,7 @@ class PostCalendar extends Component {
     }
     return (
       <div>
-        <Calendar
+        <ReactCalendar
           className="calendar"
           onClickDay={this.onClickDay}
           value={this.state.date}
@@ -35,4 +35,4 @@ class PostCalendar extends Component {
   }
 }
 
-export default withRouter(PostCalendar)
+export default withRouter(Calendar)

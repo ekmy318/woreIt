@@ -20,18 +20,19 @@ class Posts extends Component {
   }
 
   async componentDidMount () {
+    const { alert, location, user } = this.props
     try {
       const res = await axios({
         method: 'GET',
         url: `${apiUrl}/posts`,
         headers: {
-          'Authorization': `Token token=${this.props.user.token}`
+          'Authorization': `Token token=${user.token}`
         }
       })
-      const ownedPosts = res.data.posts.filter(post => (post.owner.token === this.props.user.token) && (this.props.location.state.date.substring(0, 10) === post.date.substring(0, 10)))
+      const ownedPosts = res.data.posts.filter(post => (post.owner.token === user.token) && (location.state.date.substring(0, 10) === post.date.substring(0, 10)))
       this.setState({ posts: ownedPosts })
     } catch (error) {
-      this.props.alert({
+      alert({
         heading: 'Something went wrong..',
         variant: 'danger'
       })

@@ -23,17 +23,18 @@ class Post extends Component {
   }
 
   async componentDidMount () {
+    const { alert, match, user } = this.props
     try {
       const res = await axios({
         method: 'GET',
-        url: `${apiUrl}/posts/${this.props.match.params.id}`,
+        url: `${apiUrl}/posts/${match.params.id}`,
         headers: {
-          'Authorization': `Token token=${this.props.user.token}`
+          'Authorization': `Token token=${user.token}`
         }
       })
       this.setState({ post: res.data.post })
     } catch (error) {
-      this.props.alert({
+      alert({
         heading: 'Something went wrong..',
         variant: 'danger'
       })
@@ -41,21 +42,22 @@ class Post extends Component {
   }
 
   delete = async () => {
+    const { alert, match, user } = this.props
     try {
       await axios({
         method: 'DELETE',
-        url: `${apiUrl}/posts/${this.props.match.params.id}`,
+        url: `${apiUrl}/posts/${match.params.id}`,
         headers: {
-          'Authorization': `Token token=${this.props.user.token}`
+          'Authorization': `Token token=${user.token}`
         }
       })
       this.setState({ deleted: true })
-      this.props.alert({
+      alert({
         heading: 'Post deleted!',
         variant: 'success'
       })
     } catch (error) {
-      this.props.alert({
+      alert({
         heading: 'Something went wrong..',
         variant: 'danger'
       })

@@ -25,12 +25,13 @@ class PostUpdate extends Component {
   }
 
   async componentDidMount () {
+    const { alert, match, user } = this.props
     try {
       const res = await axios({
         method: 'GET',
-        url: `${apiUrl}/posts/${this.props.match.params.id}`,
+        url: `${apiUrl}/posts/${match.params.id}`,
         headers: {
-          'Authorization': `Token token=${this.props.user.token}`
+          'Authorization': `Token token=${user.token}`
         }
       })
       const dateObj = new Date(res.data.post.date)
@@ -41,7 +42,7 @@ class PostUpdate extends Component {
       this.setState({ post: { ...res.data.post, date: formattedDate } })
       this.setState({ prevImage: this.state.post.file })
     } catch (error) {
-      this.props.alert({
+      alert({
         heading: 'Something went wrong..',
         variant: 'danger'
       })
@@ -49,25 +50,28 @@ class PostUpdate extends Component {
   }
 
   handleDelete = i => {
+    const { post } = this.state
     this.setState({
       post: {
-        ...this.state.post,
-        tags: this.state.post.tags.filter((tag, index) => index !== i)
+        ...post,
+        tags: post.tags.filter((tag, index) => index !== i)
       }
     })
   }
 
   handleAddition = tag => {
+    const { post } = this.state
     this.setState({
       post: {
-        ...this.state.post,
-        tags: [...this.state.post.tags, tag]
+        ...post,
+        tags: [...post.tags, tag]
       }
     })
   }
 
   handleChange = event => {
-    this.setState({ post: { ...this.state.post, [event.target.name]: event.target.value, file: '' } })
+    const { post } = this.state
+    this.setState({ post: { ...post, [event.target.name]: event.target.value, file: '' } })
   }
 
   deleteImageButton = event => {
@@ -77,23 +81,26 @@ class PostUpdate extends Component {
   }
 
   handleSubmit = event => {
+    const { alert, history, user } = this.props
+    const { post } = this.state
+
     event.preventDefault()
     const formData = new FormData(event.target)
-    formData.append('tags', JSON.stringify(this.state.post.tags))
+    formData.append('tags', JSON.stringify(post.tags))
     axios({
       method: 'PATCH',
-      url: `${apiUrl}/posts/${this.state.post._id}`,
+      url: `${apiUrl}/posts/${post._id}`,
       headers: {
-        'Authorization': `Token token=${this.props.user.token}`
+        'Authorization': `Token token=${user.token}`
       },
       data: formData
     })
-      .then(() => this.props.history.push(`/posts/${this.state.post._id}`))
-      .then(() => this.props.alert({
+      .then(() => history.push(`/posts/${post._id}`))
+      .then(() => alert({
         heading: 'Post updated!',
         variant: 'success'
       }))
-      .catch(() => this.props.alert({
+      .catch(() => alert({
         heading: 'Failed to create a post',
         variant: 'danger'
       }))

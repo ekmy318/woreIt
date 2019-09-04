@@ -11,7 +11,7 @@ import SignOut from '../Authentication/SignOut/SignOut'
 import ChangePassword from '../Authentication/ChangePassword/ChangePassword'
 
 import Home from '../Home/Home'
-import PostCalendar from '../PostCalendar/PostCalendar'
+import Calendar from '../Calendar/Calendar'
 
 import PostsAll from '../Posts/PostsAll'
 import Posts from '../Posts/Posts'
@@ -70,7 +70,7 @@ class App extends Component {
 
           <AuthenticatedRoute user={user} exact path='/calendar' render={() => (
             <div>
-              <PostCalendar user={user} alert={this.alert} />
+              <Calendar user={user} alert={this.alert} />
               <PostsAll user={user} alert={this.alert} />
             </div>
           )} />

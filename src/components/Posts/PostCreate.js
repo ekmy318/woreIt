@@ -25,53 +25,59 @@ class PostCreate extends Component {
   }
 
   handleDelete = i => {
+    const { post } = this.state
     this.setState({
       post: {
-        ...this.state.post,
-        tags: this.state.post.tags.filter((tag, index) => index !== i)
+        ...post,
+        tags: post.tags.filter((tag, index) => index !== i)
       }
     })
   }
 
   handleAddition = tag => {
+    const { post } = this.state
     this.setState({
       post: {
-        ...this.state.post,
-        tags: [...this.state.post.tags, tag]
+        ...post,
+        tags: [...post.tags, tag]
       }
     })
   }
 
   handleChange = event => {
+    const { post } = this.state
     this.setState({
       post: {
-        ...this.state.post,
+        ...post,
         [event.target.name]: event.target.value
       }
     })
   }
 
   handleSubmit = event => {
+    const { post } = this.state
+    const { alert, history, user } = this.props
+
     event.preventDefault()
     const formData = new FormData(event.target)
-    formData.append('tags', JSON.stringify(this.state.post.tags))
+    formData.append('tags', JSON.stringify(post.tags))
     axios({
       method: 'POST',
       url: `${apiUrl}/posts`,
       headers: {
-        'Authorization': `Token token=${this.props.user.token}`
+        'Authorization': `Token token=${user.token}`
       },
       data: formData
     })
       .then(res => {
-        this.props.history.push(`/posts/${res.data.post._id}`)
-        this.props.alert({
+        history.push(`/posts/${res.data.post._id}`)
+        alert({
           heading: 'Looking good!',
           variant: 'success'
         })
       })
       .catch(res => {
-        this.props.alert({
+        alert({
           heading: 'Something went wrong..',
           variant: 'danger'
         })
