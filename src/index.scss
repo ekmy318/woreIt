@@ -1,12 +1,18 @@
 @import '~bootstrap/scss/bootstrap';
 
-#root {
+main {
+  align-self: center;
+  // background-image: url('assets/.jpg');
+  background-attachment: fixed;
+  background-position: fixed;
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
   display: grid;
   grid-auto-rows: max-content auto;
+  justify-self: center;
   min-height: 100vh;
-​
-  main {
-    align-self: center;
-    justify-self: center;
-  }
+}
+
+.jumbotron {
+  background-color: rgba(191, 157, 133, 0.5);
 }
