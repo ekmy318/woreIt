@@ -61,7 +61,6 @@ The biggest struggle I faced through the 4 day project sprint was understanding 
 #### Future Iterations
 - Allow users to search by multiple tags
 - Order the posts by date
-- 
 
 ## Images
 App Screenshot
