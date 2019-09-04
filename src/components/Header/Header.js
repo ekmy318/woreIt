@@ -17,6 +17,12 @@ const unauthenticatedOptions = (
   </Fragment>
 )
 
+const alwaysOptions = (
+  <Fragment>
+    <Nav.Link href="#/">Home</Nav.Link>
+  </Fragment>
+)
+
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
     <Navbar.Brand href="">
@@ -26,6 +32,7 @@ const Header = ({ user }) => (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
         { user && <span className="navbar-text mr-2">Signed in as: {user.email}</span>}
+        { alwaysOptions }
         { user ? authenticatedOptions : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
