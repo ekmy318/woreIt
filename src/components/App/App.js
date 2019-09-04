@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
-import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
+import AuthenticatedRoute from '../Authentication/AuthenticatedRoute/AuthenticatedRoute'
+import AutoDismissAlert from '../Authentication/AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
 // import Footer from '../Footer/Footer'
-import SignUp from '../SignUp/SignUp'
-import SignIn from '../SignIn/SignIn'
-import SignOut from '../SignOut/SignOut'
-import ChangePassword from '../ChangePassword/ChangePassword'
+import SignUp from '../Authentication/SignUp/SignUp'
+import SignIn from '../Authentication/SignIn/SignIn'
+import SignOut from '../Authentication/SignOut/SignOut'
+import ChangePassword from '../Authentication/ChangePassword/ChangePassword'
 
 import Home from '../Home/Home'
 import PostCalendar from '../PostCalendar/PostCalendar'
@@ -44,12 +44,7 @@ class App extends Component {
       <Fragment>
         <Header user={user} />
         {alerts.map((alert, index) => (
-          <AutoDismissAlert
-            key={index}
-            heading={alert.heading}
-            variant={alert.variant}
-            message={alert.message}
-          />
+          <AutoDismissAlert key={index} heading={alert.heading} variant={alert.variant} message={alert.message} />
         ))}
         <main className="container">
           <Route path='/sign-up' render={() => (
@@ -65,66 +60,36 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
 
-          <Route exact path="/" component={Home}/>
+          <Route exact path='/' render={() => (
+            <Home user={user} />
+          )} />
 
-          <AuthenticatedRoute
-            user={user}
-            exact path='/postsAll'
-            render={() => (
-              <PostsAll
-                user={user}
-                alert={this.alert} />
-            )} />
+          <AuthenticatedRoute user={user} exact path='/postsAll' render={() => (
+            <PostsAll user={user} alert={this.alert} />
+          )} />
 
-          <AuthenticatedRoute
-            user={user}
-            exact path='/calendar'
-            render={() => (
-              <div>
-                <PostCalendar
-                  user={user}
-                  alert={this.alert} />
-                <PostsAll
-                  user={user}
-                  alert={this.alert} />
-              </div>
-            )} />
+          <AuthenticatedRoute user={user} exact path='/calendar' render={() => (
+            <div>
+              <PostCalendar user={user} alert={this.alert} />
+              <PostsAll user={user} alert={this.alert} />
+            </div>
+          )} />
 
-          <AuthenticatedRoute
-            user={user}
-            exact path='/posts'
-            render={() => (
-              <Posts
-                user={user}
-                alert={this.alert} />
-            )} />
+          <AuthenticatedRoute user={user} exact path='/posts' render={() => (
+            <Posts user={user} alert={this.alert} />
+          )} />
 
-          <AuthenticatedRoute
-            user={user}
-            path='/create-post'
-            render={() => (
-              <PostCreate
-                user={user}
-                alert={this.alert} />
-            )} />
+          <AuthenticatedRoute user={user} path='/create-post' render={() => (
+            <PostCreate user={user} alert={this.alert} />
+          )} />
 
-          <AuthenticatedRoute
-            user={user}
-            exact path='/posts/:id'
-            render={() => (
-              <Post
-                user={user}
-                alert={this.alert} />
-            )} />
+          <AuthenticatedRoute user={user} exact path='/posts/:id' render={() => (
+            <Post user={user} alert={this.alert} />
+          )} />
 
-          <AuthenticatedRoute
-            user={user}
-            exact path='/posts/:id/edit'
-            render={() => (
-              <PostUpdate
-                user={user}
-                alert={this.alert} />
-            )} />
+          <AuthenticatedRoute user={user} exact path='/posts/:id/edit' render={() => (
+            <PostUpdate user={user} alert={this.alert} />
+          )} />
         </main>
         {/* <Footer /> */}
       </Fragment>
