@@ -45,8 +45,10 @@ class PostsAll extends Component {
     this.setState({ filteredWord: event.target.value })
   }
 
-  onKeyDown = event => {
-    console.log(event)
+  keyPress = event => {
+    if (event.keyCode === 13) {
+      this.handleSubmit()
+    }
   }
 
   handleSubmit = async () => {
@@ -114,8 +116,8 @@ class PostsAll extends Component {
     return (
       <div className="postsAll">
         <Form inline>
-          <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onChange={this.handleChange} />
-          <Button variant="dark" onKeyDown={(e) => this.onKeyDown(e)} onClick={this.handleSubmit} className="mr-2">Search</Button>
+          <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onKeyDown={this.keyPress} onChange={this.handleChange} />
+          <Button variant="dark" onClick={this.handleSubmit} className="mr-2">Search</Button>
           <Button variant="dark" onClick={this.handleClear}>Clear Search</Button>
         </Form>
         <div className="postAllPost">{postsJsx}</div>
