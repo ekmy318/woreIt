@@ -84,7 +84,7 @@ class Post extends Component {
               <ListGroupItem><div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>)}</div></ListGroupItem>
             </ListGroup>
             <Card.Body>
-              <Button variant="primary" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
+              <Button variant="dark" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
               <Button variant="outline-danger" onClick={this.delete}>Delete Post</Button>
             </Card.Body>
           </Card>

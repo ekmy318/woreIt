@@ -29,10 +29,10 @@ const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImage
         />
       </Form.Group>
 
-      <Button className="mb-3" variant="primary" type="submit">
+      <Button className="mb-3" variant="dark" type="submit">
         Submit
       </Button>
-      <Button variant="outline-danger" href={cancelpath} className="ml-2 mb-3">Cancel</Button>
+      <Button variant="outline-danger" href={cancelpath} className="ml-2 mb-3 btn-outline-danger">Cancel</Button>
     </Form>
   )
 }

@@ -1,7 +1,16 @@
+.btn-outline-danger {
+  color: #B8B3A5;
+  border-color: #B8B3A5;
+}
 .createPostForm {
   margin-left: 9rem;
   margin-right: 9rem;
   padding-top: 2rem;
+}
+
+.playsinline {
+  margin-left: 6rem;
+  margin-right: 9rem;
 }
 
 .postsAll {

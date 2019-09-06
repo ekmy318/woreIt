@@ -77,7 +77,7 @@ class WebcamCapture extends Component {
           </div>
           : null }
         {this.state.cameraOn && (
-          <Webcam
+          <Webcam className='playsinline'
             audio={false}
             ref={this.setCameraRef}
             screenshotFormat="image/jpeg"
