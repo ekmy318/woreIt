@@ -3,15 +3,22 @@ import Webcam from 'react-webcam'
 import './WebcamCapture.css'
 
 class WebcamCapture extends Component {
-  state = {
-    imageData: null,
-    saveImage: false,
-    taken: false,
-    cameraOn: false
+  constructor (props) {
+    super(props)
+    this.state = {
+      imageData: null,
+      saveImage: false,
+      taken: false,
+      cameraOn: false
+    }
+    this.setCameraRef = React.createRef(null)
   }
 
-  setRef = webcam => {
-    this.webcam = webcam
+  capture = () => {
+    setTimeout(() => {
+      const imageSrc = this.setCameraRef.current.getScreenshot()
+      this.setState({ imageData: imageSrc, cameraOn: false, taken: true })
+    }, 3000)
   }
 
   useCamera = () => {
@@ -20,11 +27,6 @@ class WebcamCapture extends Component {
         cameraOn: !previousState.cameraOn
       }
     })
-  }
-
-  capture = () => {
-    const imageSrc = this.webcam.getScreenshot()
-    this.setState({ imageData: imageSrc, cameraOn: false, taken: true })
   }
 
   onClickRetake = e => {
@@ -77,7 +79,7 @@ class WebcamCapture extends Component {
         {this.state.cameraOn && (
           <Webcam
             audio={false}
-            ref={this.setRef}
+            ref={this.setCameraRef}
             screenshotFormat="image/jpeg"
             videoConstraints={videoConstraints}
           />

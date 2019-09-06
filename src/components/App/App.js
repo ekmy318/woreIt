@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from '../Authentication/AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../Authentication/AutoDismissAlert/AutoDismissAlert'
 import Header from '../Header/Header'
-// import Footer from '../Footer/Footer'
 import SignUp from '../Authentication/SignUp/SignUp'
 import SignIn from '../Authentication/SignIn/SignIn'
 import SignOut from '../Authentication/SignOut/SignOut'
@@ -46,7 +45,7 @@ class App extends Component {
         {alerts.map((alert, index) => (
           <AutoDismissAlert key={index} heading={alert.heading} variant={alert.variant} message={alert.message} />
         ))}
-        <main className="container">
+        <main className="container" style={{ marginTop: '58px' }}>
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />
@@ -69,7 +68,7 @@ class App extends Component {
           )} />
 
           <AuthenticatedRoute user={user} exact path='/calendar' render={() => (
-            <div>
+            <div className="row">
               <Calendar user={user} alert={this.alert} />
               <PostsAll user={user} alert={this.alert} />
             </div>
@@ -91,7 +90,6 @@ class App extends Component {
             <PostUpdate user={user} alert={this.alert} />
           )} />
         </main>
-        {/* <Footer /> */}
       </Fragment>
     )
   }

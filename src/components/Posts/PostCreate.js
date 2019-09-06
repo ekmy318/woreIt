@@ -4,8 +4,8 @@ import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
 import './Tags.css'
+import './Posts.css'
 import PostForm from './PostForm'
-import Layout from '../Layout/Layout'
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
@@ -93,7 +93,7 @@ class PostCreate extends Component {
       )
     }
     return (
-      <Layout md="8" lg="6">
+      <div className="createPostForm">
         <WebcamCapture />
         <PostForm
           post={post}
@@ -105,7 +105,7 @@ class PostCreate extends Component {
           handleAddition={this.handleAddition}
           allowDragDrop={false}
         />
-      </Layout>
+      </div>
     )
   }
 }

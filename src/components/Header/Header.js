@@ -6,7 +6,6 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#create-post">Log an Outfit</Nav.Link>
   </Fragment>
 )
 
@@ -16,15 +15,14 @@ const unauthenticatedOptions = (
     <Nav.Link href="#sign-in">Sign In</Nav.Link>
   </Fragment>
 )
-
 const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
   </Fragment>
 )
 
-const Header = ({ user }) => (
-  <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+const Header = ({ user, setUser }) => (
+  <Navbar fixed="top" variant="dark" expand="md" collapseOnSelect className="nav-bar">
     <Navbar.Brand href="">
       Defeat Repeat
     </Navbar.Brand>

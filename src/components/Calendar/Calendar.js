@@ -3,6 +3,8 @@ import ReactCalendar from 'react-calendar'
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 
+import Button from 'react-bootstrap/Button'
+
 import './Calendar.css'
 
 class Calendar extends Component {
@@ -24,6 +26,7 @@ class Calendar extends Component {
     }
     return (
       <div>
+        <Button variant="dark" className="outfitButton" size='lg' href='/#create-post'>Log an Outfit</Button>
         <ReactCalendar
           className="calendar"
           onClickDay={this.onClickDay}

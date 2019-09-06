@@ -1,7 +1,9 @@
 .calendar {
-  display: block;
-  margin-left: auto;
-  margin-top: 1.5rem;
-  margin-right: auto;
-  width: 700px;
+  padding: .5rem;
+  width: 600px;
+}
+
+.outfitButton {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }

@@ -1,11 +1,33 @@
+.createPostForm {
+  margin-left: 9rem;
+  margin-right: 9rem;
+  padding-top: 2rem;
+}
+
 .postsAll {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  overflow: scroll;
-  text-align: center;
+}
+
+.postAllPost {
+  filter: opacity(50);
+  overflow: auto;
+}
+
+.tags {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  margin-right: 0.5rem;
+  background-color: #eee;
+  display: inline-block;
 }
 
 .inputfile {
   cursor: pointer;
+}
+
+.form-inline {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
 }

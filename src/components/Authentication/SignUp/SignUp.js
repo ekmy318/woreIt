@@ -33,8 +33,7 @@ class SignUp extends Component {
       .then(() => signIn(this.state))
       .then(res => setUser(res.data.user))
       .then(() => alert({
-        heading: 'Sign Up Success',
-        message: messages.signUpSuccess,
+        heading: messages.signUpSuccess,
         variant: 'success'
       }))
       .then(() => history.push('/calendar'))
@@ -42,8 +41,7 @@ class SignUp extends Component {
         console.error(error)
         this.setState({ email: '', password: '', passwordConfirmation: '' })
         alert({
-          heading: 'Sign Up Failed',
-          message: messages.signUpFailure,
+          heading: messages.signUpFailure,
           variant: 'danger'
         })
       })
@@ -55,7 +53,7 @@ class SignUp extends Component {
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <Jumbotron className="jumbotron">
+          <Jumbotron className="jumbotron-auth">
             <div className="row">
               <h3 className="col-8">Sign Up</h3>
               <p className="col-4">Already a member?<br/><a href="#/sign-in" style={{ color: '#efefef' }}>Sign in!</a></p>

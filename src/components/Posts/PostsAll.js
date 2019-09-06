@@ -10,7 +10,6 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import ListGroup from 'react-bootstrap/ListGroup'
 
-import Layout from '../Layout/Layout'
 import './Posts.css'
 
 class PostsAll extends Component {
@@ -46,7 +45,12 @@ class PostsAll extends Component {
     this.setState({ filteredWord: event.target.value })
   }
 
+  onKeyDown = event => {
+    console.log(event)
+  }
+
   handleSubmit = async () => {
+    event.preventDefault()
     const { alert, user } = this.props
     try {
       const res = await axios({
@@ -56,7 +60,7 @@ class PostsAll extends Component {
           'Authorization': `Token token=${user.token}`
         }
       })
-      const ownedTag = res.data.posts.filter(post => (post.owner.token === user.token)).filter(post => post.tags.includes(this.state.filteredWord.toLowerCase() || this.state.filteredWord.toUpperCase()))
+      const ownedTag = res.data.posts.filter(post => (post.owner.token === user.token)).filter(post => post.tags.includes(this.state.filteredWord.toLowerCase()))
       this.setState({ posts: ownedTag })
     } catch (error) {
       alert({
@@ -77,7 +81,7 @@ class PostsAll extends Component {
         }
       })
       const ownedTag = res.data.posts.filter(post => (post.owner.token === user.token))
-      this.setState({ posts: ownedTag })
+      this.setState({ posts: ownedTag, filteredWord: '' })
     } catch (error) {
       alert({
         heading: 'Something went wrong..',
@@ -93,10 +97,11 @@ class PostsAll extends Component {
     if (posts.length > 0) {
       postsJsx = (
         posts.map(post => (
-          <ListGroup.Item key={post._id}>
-            <Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
+          <ListGroup.Item style={{ backgroundColor: 'rgba(184, 179, 165, .65)', marginBottom: '.25rem' }}key={post._id}>
+            <Link style={{ color: '#4b3802', fontWeight: 'bold' }} to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
+            <hr/>
             <p>Notes: {post.notes}</p>
-            <div>Tags: {post.tags.map(tag => <div style={{ padding: '0.25rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div>
+            <div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>) }</div>
           </ListGroup.Item>
         )).reverse()
       )
@@ -106,14 +111,14 @@ class PostsAll extends Component {
       )
     }
     return (
-      <Layout md='4' lg='6' className="postsAll">
+      <div className="postsAll">
         <Form inline>
           <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onChange={this.handleChange} />
-          <Button variant="outline-dark" onClick={this.handleSubmit} className="mr-2">Search</Button>
+          <Button variant="dark" onKeyDown={(e) => this.onKeyDown(e)} onClick={this.handleSubmit} className="mr-2">Search</Button>
           <Button variant="dark" onClick={this.handleClear}>Clear Search</Button>
         </Form>
-        {postsJsx}
-      </Layout>
+        <div className="postAllPost">{postsJsx}</div>
+      </div>
     )
   }
 }

@@ -81,7 +81,7 @@ class Post extends Component {
             </Card.Body>
             <ListGroup className="list-group-flush">
               <ListGroupItem>{post.notes || 'No notes provided'}</ListGroupItem>
-              <ListGroupItem><div>Tags: {post.tags.map(tag => <div style={{ padding: '0.5rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div></ListGroupItem>
+              <ListGroupItem><div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>)}</div></ListGroupItem>
             </ListGroup>
             <Card.Body>
               <Button variant="primary" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
