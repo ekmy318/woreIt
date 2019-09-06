@@ -71,6 +71,7 @@ class PostsAll extends Component {
   }
 
   handleClear = async () => {
+    event.preventDefault()
     const { alert, user } = this.props
     try {
       const res = await axios({

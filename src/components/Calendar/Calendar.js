@@ -26,7 +26,7 @@ class Calendar extends Component {
     }
     return (
       <div>
-        <Button variant="dark" className="outfitButton" size='lg' href='/#create-post'>Log an Outfit</Button>
+        <Button variant="dark" className="outfitButton" size='lg' href='/create-post'>Log an Outfit</Button>
         <ReactCalendar
           className="calendar"
           onClickDay={this.onClickDay}
