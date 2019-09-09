@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Webcam from 'react-webcam'
+import Button from 'react-bootstrap/Button'
 import './WebcamCapture.css'
 
 class WebcamCapture extends Component {
@@ -71,17 +72,29 @@ class WebcamCapture extends Component {
 
     return (
       <div className="webcam">
-        {this.state.cameraOn ? (!this.state.taken && <button onClick={this.useCamera}>Webcam Off</button>) : (!this.state.taken && <button onClick={this.useCamera}>Use Webcam</button>)}
-        {this.state.cameraOn && <button onClick={this.capture}>Capture</button>}
+        <div className="row" style={{ justifyContent: 'center', marginBottom: '-.5rem' }}>
+          <div className="mr-1">
+            {this.state.cameraOn ? (!this.state.taken && <Button variant="dark" onClick={this.useCamera}>Webcam Off</Button>) : (!this.state.taken && <Button variant="dark" onClick={this.useCamera}>Use Webcam</Button>)}
+          </div>
+          <div className="ml-1">
+            {this.state.cameraOn && <Button variant="dark" className='cameraButton' onClick={this.capture}>Capture</Button>}
+          </div>
+        </div>
         {this.state.imageData
-          ? <div>
-            <button onClick={this.onClickRetake}>Retake</button>
-            <a href={this.state.imageData} download="image"><button onClick={this.onClickSave}>Save</button></a>
-            <img src={this.state.imageData}/>
+          ? <div className="row" style={{ justifyContent: 'center', marginBottom: '1rem', marginTop: '.5rem' }}>
+            <div className="mr-1">
+              <Button variant='dark' onClick={this.onClickRetake}>Retake</Button>
+            </div>
+            <div className="ml-1">
+              <a href={this.state.imageData} download="image"><Button variant='dark' className='cameraButton' onClick={this.onClickSave}>Save</Button></a>
+            </div>
           </div>
           : null }
+        <div className="row justify-content-center">
+          <img style={{ marginBottom: '1rem' }} src={this.state.imageData}/>
+        </div>
         {this.state.cameraOn && (
-          <div className="overlay-container">
+          <div className="overlay-container row justify-content-center" style={{ marginBottom: '1rem' }}>
             <div className="overlay">{this.state.count}</div>
             <Webcam
               audio={false}

@@ -7,16 +7,14 @@ import './Posts.css'
 const PostForm = ({ post, showFileField, handleChange, handleSubmit, deleteImageButton, handleAddition, handleDelete, prevImage, handleTagClick }) => {
   const cancelpath = post._id ? `#posts/${post._id}` : '#calendar'
   return (
-    <Form className="postForm" onSubmit={handleSubmit}>
-      <div className="col lg-6">
-        <Form.Group controlId="file" encType="multipart/form-data">
-          {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/> : ''}
-          {showFileField && <Form.Control name="file" type="file" className="inputfile" required onChange={handleChange} />}
-        </Form.Group>
-        {post._id && <Button variant="outline-dark" className="mb-3" onClick={deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>}
-      </div>
+    <Form className="postForm row" onSubmit={handleSubmit}>
+      <Form.Group controlId="file" encType="multipart/form-data" className={post._id ? 'col-lg-6' : ''}>
+        {post._id ? <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/> : ''}
+        {showFileField && <Form.Control name="file" type="file" className="inputfile" required onChange={handleChange} />}
+      </Form.Group>
+      {post._id && <Button variant="outline-dark" className="mb-3" onClick={deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>}
 
-      <div className="col lg-6">
+      <div className="col-lg-6">
         <Form.Group controlId="date">
           <Form.Label>Date</Form.Label>
           <Form.Control type="date" placeholder="date" value={post.date} name="date" required onChange={handleChange} />

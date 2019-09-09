@@ -100,7 +100,7 @@ class PostsAll extends Component {
     if (posts.length > 0) {
       postsJsx = (
         posts.map(post => (
-          <ListGroup.Item style={{ backgroundColor: 'rgba(184, 179, 165, .65)', marginBottom: '.25rem' }}key={post._id}>
+          <ListGroup.Item style={{ backgroundColor: 'rgba(184, 179, 165, .65)', marginBottom: '.25rem', borderRadius: '4px 4px 4px 4px' }} key={post._id}>
             <Link style={{ color: '#4b3802', fontWeight: 'bold' }} to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link>
             <hr/>
             <p>Notes: {post.notes}</p>

@@ -73,7 +73,7 @@ class Post extends Component {
     } else if (post) {
       postJsx = (
         <div>
-          <Button variant="dark" className="mb-3 ml-1 calendarBackButton" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+          <Button variant="dark" className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
           <Card style={{ width: '34rem', backgroundColor: 'rgba(184, 179, 165, .65)' }}>
             <Card.Img variant="top" src={post.file} />
             <Card.Body>
@@ -85,7 +85,7 @@ class Post extends Component {
             </ListGroup>
             <Card.Body>
               <Button variant="dark" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
-              <Button variant="outline-danger" onClick={this.delete}>Delete Post</Button>
+              <Button variant="danger" onClick={this.delete}>Delete Post</Button>
             </Card.Body>
           </Card>
         </div>

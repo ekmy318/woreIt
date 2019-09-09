@@ -1,6 +1,6 @@
-button {
-  display: block;
-  margin-bottom: 10px;
+.cameraButton {
+  background-color: #B8B3A5;
+  border-color: #B8B3A5;
 }
 
 .overlay {

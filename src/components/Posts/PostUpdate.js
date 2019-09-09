@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import apiUrl from '../../apiConfig'
-import PostForm from './PostForm'
-import './Posts.css'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
+import { WithContext as ReactTags } from 'react-tag-input'
+
+import apiUrl from '../../apiConfig'
+import './Posts.css'
+import './Tags.css'
 
 class PostUpdate extends Component {
   constructor (props) {
@@ -108,6 +113,7 @@ class PostUpdate extends Component {
 
   render () {
     const { post, showFileField, prevImage } = this.state
+    const cancelpath = post._id ? `#posts/${post._id}` : '#calendar'
 
     if (!post) {
       return (
@@ -115,20 +121,38 @@ class PostUpdate extends Component {
       )
     }
     return (
-      <div className="PostForm row">
+      <div>
         <WebcamCapture />
-        <PostForm
-          post={post}
-          prevImage={prevImage}
-          showFileField={showFileField}
-          deleteImageButton={this.deleteImageButton}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          handleTagClick={this.handleTagClick}
-          allowDragDrop={false}
-        />
+        <Form className="row" onSubmit={this.handleSubmit}>
+          <Form.Group controlId="file" encType="multipart/form-data" className='col'>
+            <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/>
+          </Form.Group>
+
+          <div className="col" style={{ marginTop: '1.5rem' }}>
+            {showFileField && <Form.Control name="file" type="file" className="inputfile labelPost" required onChange={this.handleChange} />}
+            <Button style={{ marginTop: '.5rem' }} variant={ showFileField ? 'danger' : 'dark' } onClick={this.deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>
+            <Form.Group controlId="date" className="mt-4">
+              <Form.Label className='labelPost'>Date</Form.Label>
+              <Form.Control className="inputPost" type="date" placeholder="date" value={post.date} name="date" required onChange={this.handleChange} />
+            </Form.Group>
+
+            <Form.Group controlId="notes">
+              <Form.Label className='labelPost'>Notes</Form.Label>
+              <Form.Control className="inputPost" type="text" placeholder="notes" value={post.notes} name="notes" onChange={this.handleChange} />
+            </Form.Group>
+
+            <Form.Group controlId="tags">
+              <Form.Label className='labelPost'>Press Enter after each tag</Form.Label>
+              <ReactTags tags={post.tags} handleAddition={this.handleAddition} handleDelete={this.handleDelete} handleTagClick={this.handleTagClick} allowDragDrop={false}
+              />
+            </Form.Group>
+
+            <Button className="mb-3" variant="dark" type="submit">
+              Submit
+            </Button>
+            <Button variant="danger" href={cancelpath} className="ml-2 mb-3">Cancel</Button>
+          </div>
+        </Form>
       </div>
     )
   }

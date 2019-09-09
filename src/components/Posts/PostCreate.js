@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import PostForm from './PostForm'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
+import { WithContext as ReactTags } from 'react-tag-input'
+
 import apiUrl from '../../apiConfig'
-import './Tags.css'
 import './Posts.css'
+import './Tags.css'
 
 class PostCreate extends Component {
   constructor (props) {
@@ -18,9 +22,7 @@ class PostCreate extends Component {
         notes: '',
         file: '',
         tags: []
-      },
-      imageDelete: false,
-      showFileField: true
+      }
     }
   }
 
@@ -85,7 +87,7 @@ class PostCreate extends Component {
   }
 
   render () {
-    const { post, showFileField, imageDelete } = this.state
+    const { post } = this.state
 
     if (!post) {
       return (
@@ -93,18 +95,34 @@ class PostCreate extends Component {
       )
     }
     return (
-      <div className="PostForm row">
+      <div className="row">
         <WebcamCapture />
-        <PostForm
-          post={post}
-          imageDelete={imageDelete}
-          showFileField={showFileField}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          allowDragDrop={false}
-        />
+        <Form className="postForm" onSubmit={this.handleSubmit}>
+          <Form.Group controlId="file" encType="multipart/form-data">
+            <Form.Control name="file" type="file" className="inputfile labelPost" required onChange={this.handleChange} />
+          </Form.Group>
+
+          <Form.Group controlId="date">
+            <Form.Label className='labelPost'>Date</Form.Label>
+            <Form.Control type="date" placeholder="date" value={post.date} name="date" required onChange={this.handleChange} />
+          </Form.Group>
+
+          <Form.Group controlId="notes">
+            <Form.Label className='labelPost'>Notes</Form.Label>
+            <Form.Control type="text" placeholder="notes" value={post.notes} name="notes" onChange={this.handleChange} />
+          </Form.Group>
+
+          <Form.Group controlId="tags">
+            <Form.Label className='labelPost'>Press Enter after each tag</Form.Label>
+            <ReactTags tags={post.tags} handleAddition={this.handleAddition} handleDelete={this.handleDelete} handleTagClick={this.handleTagClick} allowDragDrop={false}
+            />
+          </Form.Group>
+
+          <Button className="mb-3" variant="dark" type="submit">
+            Submit
+          </Button>
+          <Button variant="danger" href={post._id ? `#posts/${post._id}` : '#calendar'} className="ml-2 mb-3">Cancel</Button>
+        </Form>
       </div>
     )
   }
