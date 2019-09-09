@@ -73,15 +73,15 @@ class Post extends Component {
     } else if (post) {
       postJsx = (
         <div>
-          <Button variant="dark" className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
-          <Card style={{ width: '34rem' }}>
+          <Button variant="dark" className="mb-3 ml-1 calendarBackButton" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
+          <Card style={{ width: '34rem', backgroundColor: 'rgba(184, 179, 165, .65)' }}>
             <Card.Img variant="top" src={post.file} />
             <Card.Body>
               <Card.Title><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Card.Title>
             </Card.Body>
             <ListGroup className="list-group-flush">
-              <ListGroupItem>{post.notes || 'No notes provided'}</ListGroupItem>
-              <ListGroupItem><div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>)}</div></ListGroupItem>
+              <ListGroupItem className="listGroupItem">Notes: {post.notes || 'No notes provided'}</ListGroupItem>
+              <ListGroupItem className="listGroupItem"><div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>)}</div></ListGroupItem>
             </ListGroup>
             <Card.Body>
               <Button variant="dark" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>

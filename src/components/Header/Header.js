@@ -21,7 +21,7 @@ const alwaysOptions = (
   </Fragment>
 )
 
-const Header = ({ user, setUser }) => (
+const Header = ({ user }) => (
   <Navbar fixed="top" variant="dark" expand="md" collapseOnSelect className="nav-bar">
     <Navbar.Brand href="">
       Defeat Repeat

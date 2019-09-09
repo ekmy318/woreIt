@@ -1,16 +1,19 @@
-.btn-outline-danger {
-  color: #B8B3A5;
-  border-color: #B8B3A5;
-}
-.createPostForm {
-  margin-left: 9rem;
-  margin-right: 9rem;
-  padding-top: 2rem;
+.calendarBackButton {
+  background-color: #B8B3A5;
 }
 
-.playsinline {
-  margin-left: 6rem;
-  margin-right: 9rem;
+
+.form-inline {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.inputfile {
+  cursor: pointer;
+}
+
+.listGroupItem {
+  background-color: transparent;
 }
 
 .postsAll {
@@ -24,19 +27,16 @@
   overflow: auto;
 }
 
+.postForm {
+  margin-left: -4rem;
+  margin-right: 4rem;
+  padding-top: 7rem;
+}
+
 .tags {
   padding: 0.5rem;
   border: 1px solid #ccc;
   margin-right: 0.5rem;
   background-color: #eee;
   display: inline-block;
-}
-
-.inputfile {
-  cursor: pointer;
-}
-
-.form-inline {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
 }

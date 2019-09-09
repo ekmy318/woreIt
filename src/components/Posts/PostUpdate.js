@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
-import Layout from '../Layout/Layout'
 import PostForm from './PostForm'
+import './Posts.css'
 import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostUpdate extends Component {
@@ -115,7 +115,7 @@ class PostUpdate extends Component {
       )
     }
     return (
-      <Layout md="8" lg="6">
+      <div className="PostForm row">
         <WebcamCapture />
         <PostForm
           post={post}
@@ -129,7 +129,7 @@ class PostUpdate extends Component {
           handleTagClick={this.handleTagClick}
           allowDragDrop={false}
         />
-      </Layout>
+      </div>
     )
   }
 }

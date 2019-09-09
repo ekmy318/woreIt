@@ -9,7 +9,8 @@ class WebcamCapture extends Component {
       imageData: null,
       saveImage: false,
       taken: false,
-      cameraOn: false
+      cameraOn: false,
+      count: null
     }
     this.setCameraRef = React.createRef(null)
   }
@@ -17,8 +18,11 @@ class WebcamCapture extends Component {
   capture = () => {
     setTimeout(() => {
       const imageSrc = this.setCameraRef.current.getScreenshot()
-      this.setState({ imageData: imageSrc, cameraOn: false, taken: true })
+      this.setState({ imageData: imageSrc, cameraOn: false, taken: true, count: null })
     }, 3000)
+    this.setState({ count: 3 })
+    setTimeout(() => { this.setState({ count: 2 }) }, 1000)
+    setTimeout(() => { this.setState({ count: 1 }) }, 2000)
   }
 
   useCamera = () => {
@@ -73,16 +77,19 @@ class WebcamCapture extends Component {
           ? <div>
             <button onClick={this.onClickRetake}>Retake</button>
             <a href={this.state.imageData} download="image"><button onClick={this.onClickSave}>Save</button></a>
-            <p><img src={this.state.imageData}/></p>
+            <img src={this.state.imageData}/>
           </div>
           : null }
         {this.state.cameraOn && (
-          <Webcam className='playsinline'
-            audio={false}
-            ref={this.setCameraRef}
-            screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
-          />
+          <div className="overlay-container">
+            <div className="overlay">{this.state.count}</div>
+            <Webcam
+              audio={false}
+              ref={this.setCameraRef}
+              screenshotFormat="image/jpeg"
+              videoConstraints={videoConstraints}
+            />
+          </div>
         )}
       </div>
     )

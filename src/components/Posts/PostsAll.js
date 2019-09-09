@@ -118,7 +118,7 @@ class PostsAll extends Component {
         <Form inline>
           <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onKeyDown={this.keyPress} onChange={this.handleChange} />
           <Button variant="dark" onClick={this.handleSubmit} className="mr-2">Search</Button>
-          <Button variant="dark" onClick={this.handleClear}>Clear Search</Button>
+          <Button variant="danger" onClick={this.handleClear}>Clear Search</Button>
         </Form>
         <div className="postAllPost">{postsJsx}</div>
       </div>

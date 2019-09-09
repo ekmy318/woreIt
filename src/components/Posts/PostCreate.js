@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
+import PostForm from './PostForm'
+import WebcamCapture from '../WebcamCapture/WebcamCapture'
 import apiUrl from '../../apiConfig'
 import './Tags.css'
 import './Posts.css'
-import PostForm from './PostForm'
-import WebcamCapture from '../WebcamCapture/WebcamCapture'
 
 class PostCreate extends Component {
   constructor (props) {
@@ -93,7 +93,7 @@ class PostCreate extends Component {
       )
     }
     return (
-      <div className="createPostForm">
+      <div className="PostForm row">
         <WebcamCapture />
         <PostForm
           post={post}

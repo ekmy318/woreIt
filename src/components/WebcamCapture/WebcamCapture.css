@@ -3,8 +3,27 @@ button {
   margin-bottom: 10px;
 }
 
+.overlay {
+  align-items: center;
+  bottom: 0;
+  color: #000000;
+  display: flex;
+  font-size: 40vmin;
+  justify-content: center;
+  left: 0;
+  opacity: 0.6;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.overlay-container {
+  position: relative;
+}
+
 .webcam {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 1rem;
 }
