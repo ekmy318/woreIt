@@ -10,8 +10,12 @@
 }
 
 .inputfile {
+  background-color: rgba(184, 179, 165, .75);
+  border-radius: 4px 4px 4px 4px;
   cursor: pointer;
+  display: block;
   margin-bottom: .5rem;
+  padding: .35rem .5rem;
 }
 
 .inputPost {
@@ -43,14 +47,15 @@
 }
 
 .postForm {
-  margin-left: -4rem;
+  margin-left: -3rem;
   margin-right: 4rem;
-  padding-top: 7rem;
+  padding-top: 8rem;
 }
 
 .tags {
-  padding: 0.5rem;
+  padding: 0.25rem;
   border: 1px solid #ccc;
+  border-radius: 4px 4px 4px 4px;
   margin-right: 0.5rem;
   background-color: #eee;
   display: inline-block;

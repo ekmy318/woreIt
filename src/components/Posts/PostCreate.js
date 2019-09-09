@@ -99,17 +99,17 @@ class PostCreate extends Component {
         <WebcamCapture />
         <Form className="postForm" onSubmit={this.handleSubmit}>
           <Form.Group controlId="file" encType="multipart/form-data">
-            <Form.Control name="file" type="file" className="inputfile labelPost" required onChange={this.handleChange} />
+            <Form.Control name="file" type="file" className="inputfile" required onChange={this.handleChange} />
           </Form.Group>
 
           <Form.Group controlId="date">
             <Form.Label className='labelPost'>Date</Form.Label>
-            <Form.Control type="date" placeholder="date" value={post.date} name="date" required onChange={this.handleChange} />
+            <Form.Control className='inputPost' type="date" placeholder="date" value={post.date} name="date" required onChange={this.handleChange} />
           </Form.Group>
 
           <Form.Group controlId="notes">
             <Form.Label className='labelPost'>Notes</Form.Label>
-            <Form.Control type="text" placeholder="notes" value={post.notes} name="notes" onChange={this.handleChange} />
+            <Form.Control className='inputPost' type="text" placeholder="notes" value={post.notes} name="notes" onChange={this.handleChange} />
           </Form.Group>
 
           <Form.Group controlId="tags">

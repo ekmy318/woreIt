@@ -72,7 +72,7 @@ class WebcamCapture extends Component {
 
     return (
       <div className="webcam">
-        <div className="row" style={{ justifyContent: 'center', marginBottom: '-.5rem' }}>
+        <div className="row" style={{ justifyContent: 'center' }}>
           <div className="mr-1">
             {this.state.cameraOn ? (!this.state.taken && <Button variant="dark" onClick={this.useCamera}>Webcam Off</Button>) : (!this.state.taken && <Button variant="dark" onClick={this.useCamera}>Use Webcam</Button>)}
           </div>
@@ -91,10 +91,10 @@ class WebcamCapture extends Component {
           </div>
           : null }
         <div className="row justify-content-center">
-          <img style={{ marginBottom: '1rem' }} src={this.state.imageData}/>
+          <img style={{ marginBottom: '1.5rem' }} src={this.state.imageData}/>
         </div>
         {this.state.cameraOn && (
-          <div className="overlay-container row justify-content-center" style={{ marginBottom: '1rem' }}>
+          <div className="overlay-container row justify-content-center" style={{ marginBottom: '1.5rem' }}>
             <div className="overlay">{this.state.count}</div>
             <Webcam
               audio={false}

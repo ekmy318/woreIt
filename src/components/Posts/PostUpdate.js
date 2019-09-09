@@ -128,10 +128,10 @@ class PostUpdate extends Component {
             <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/>
           </Form.Group>
 
-          <div className="col" style={{ marginTop: '1.5rem' }}>
-            {showFileField && <Form.Control name="file" type="file" className="inputfile labelPost" required onChange={this.handleChange} />}
-            <Button style={{ marginTop: '.5rem' }} variant={ showFileField ? 'danger' : 'dark' } onClick={this.deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>
-            <Form.Group controlId="date" className="mt-4">
+          <div className="col" style={{ marginTop: '3.5rem' }}>
+            {showFileField && <Form.Control name="file" type="file" className="inputfile" style={{ borderRadius: '4px 4px 4px 4px' }} required onChange={this.handleChange} />}
+            <Button variant={ showFileField ? 'danger' : 'dark' } onClick={this.deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>
+            <Form.Group controlId="date" className="mt-3">
               <Form.Label className='labelPost'>Date</Form.Label>
               <Form.Control className="inputPost" type="date" placeholder="date" value={post.date} name="date" required onChange={this.handleChange} />
             </Form.Group>
