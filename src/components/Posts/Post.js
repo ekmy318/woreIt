@@ -80,8 +80,8 @@ class Post extends Component {
               <Card.Title><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Card.Title>
             </Card.Body>
             <ListGroup className="list-group-flush">
-              <ListGroupItem className="listGroupItem">Notes: {post.notes || 'No notes provided'}</ListGroupItem>
-              <ListGroupItem className="listGroupItem"><div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>)}</div></ListGroupItem>
+              <ListGroupItem className="list-group-item">Notes: {post.notes || 'No notes provided'}</ListGroupItem>
+              <ListGroupItem className="list-group-item"><div>Tags: {post.tags.map(tag => <div className="tags" key={tag}>{tag}</div>)}</div></ListGroupItem>
             </ListGroup>
             <Card.Body>
               <Button variant="dark" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
