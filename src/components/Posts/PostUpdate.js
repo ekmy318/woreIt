@@ -101,10 +101,10 @@ class PostUpdate extends Component {
       data: formData
     })
       .then(() => history.push(`/posts/${post._id}`))
-      .then(() => alert({
-        heading: 'Post updated!',
-        variant: 'success'
-      }))
+      // .then(() => alert({
+      //   heading: 'Post updated!',
+      //   variant: 'success'
+      // }))
       .catch(() => alert({
         heading: 'Failed to create a post',
         variant: 'danger'

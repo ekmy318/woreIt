@@ -43,6 +43,7 @@
 
 .postAllPost {
   filter: opacity(50);
+  height: 75vh;
   overflow: auto;
 }
 

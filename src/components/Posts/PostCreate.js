@@ -73,10 +73,10 @@ class PostCreate extends Component {
     })
       .then(res => {
         history.push(`/posts/${res.data.post._id}`)
-        alert({
-          heading: 'Looking good!',
-          variant: 'success'
-        })
+        // alert({
+        //   heading: 'Looking good!',
+        //   variant: 'success'
+        // })
       })
       .catch(res => {
         alert({
