@@ -125,11 +125,11 @@ class PostUpdate extends Component {
         <WebcamCapture />
         <Form className="row" onSubmit={this.handleSubmit}>
           <Form.Group controlId="file" encType="multipart/form-data" className='col'>
-            <img style={{ filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/>
+            <img style={{ width: '640px', height: '512px', filter: showFileField ? 'grayscale(100%)' : 'grayscale(0%)' }} src={post.file || prevImage}/>
           </Form.Group>
 
           <div className="col" style={{ marginTop: '3.5rem' }}>
-            {showFileField && <Form.Control name="file" type="file" className="inputfile" style={{ borderRadius: '4px 4px 4px 4px' }} required onChange={this.handleChange} />}
+            {showFileField && <Form.Control name="file" type="file" className="inputfile" required onChange={this.handleChange} />}
             <Button variant={ showFileField ? 'danger' : 'dark' } onClick={this.deleteImageButton}>{showFileField ? 'Cancel' : 'Update Picture'}</Button>
             <Form.Group controlId="date" className="mt-3">
               <Form.Label className='labelPost'>Date</Form.Label>
