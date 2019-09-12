@@ -46,14 +46,14 @@ class Posts extends Component {
     if (posts.length > 0) {
       postsJsx = (
         posts.map(post => (
-          <Card key={post._id} style={{ width: '34rem' }} className="col">
+          <Card key={post._id} style={{ width: '34rem', backgroundColor: 'rgba(184, 179, 165, .65)' }}>
             <Card.Img variant="top" src={post.file} />
             <Card.Body>
-              <Card.Title><Link to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link></Card.Title>
+              <Card.Title><Link style={{ color: '#4b3802', fontWeight: 'bold' }} to={`/posts/${post._id}`}><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Link></Card.Title>
             </Card.Body>
             <ListGroup className="list-group-flush">
-              <ListGroupItem>{post.notes || 'No notes provided'}</ListGroupItem>
-              <ListGroupItem><div>Tags: {post.tags.map(tag => <div style={{ padding: '0.5rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div></ListGroupItem>
+              <ListGroupItem className="listGroupItem">Notes: {post.notes || 'No notes provided'}</ListGroupItem>
+              <ListGroupItem className="listGroupItem"><div>Tags: {post.tags.map(tag => <div className="tags" style={{ padding: '0.5rem', border: '1px solid #ccc', marginRight: '0.5rem', backgroundColor: '#eee', display: 'inline-block' }} key={tag}>{tag}</div>) }</div></ListGroupItem>
             </ListGroup>
             <Card.Body>
               <Button variant="dark" className="mr-2" href={`#posts/${post._id}/edit`}>Edit Post</Button>
