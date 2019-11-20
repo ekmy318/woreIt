@@ -1,11 +1,29 @@
 .calendar {
   border-radius: 4px 4px 4px 4px;
   padding: .5rem;
-  width: 600px;
+  width: 100%;
+}
+
+.calendar abbr {
+  text-decoration: none;
 }
 
 .outfitButton {
   background-color: #B8B3A5;
-  margin-bottom: 1.25rem;
-  margin-top: 1.25rem;
+}
+
+@media (min-width: 576px) {
+  .react-calendar__tile {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .react-calendar__navigation button {
+    font-size: 1.5rem;
+  }
+
+  .react-calendar__month-view__weekdays__weekday {
+    font-size: 1rem;
+  }
+
 }

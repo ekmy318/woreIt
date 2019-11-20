@@ -25,10 +25,10 @@ class Calendar extends Component {
       }} />
     }
     return (
-      <div>
+      <div className="col-md-8">
         <Button variant="dark" className="outfitButton" size='lg' href='#create-post'>Log an Outfit</Button>
         <ReactCalendar
-          className="calendar"
+          className="calendar mt-4"
           onClickDay={this.onClickDay}
           value={this.state.date}
           locale= 'en-US'

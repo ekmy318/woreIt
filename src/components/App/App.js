@@ -45,7 +45,7 @@ class App extends Component {
         {alerts.map((alert, index) => (
           <AutoDismissAlert key={index} heading={alert.heading} variant={alert.variant} message={alert.message} />
         ))}
-        <main className="container" style={{ marginTop: '58px' }}>
+        <main className="container-fluid">
           <Route path='/sign-up' render={() => (
             <SignUp alert={this.alert} setUser={this.setUser} />
           )} />

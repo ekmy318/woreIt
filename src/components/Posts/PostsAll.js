@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import ListGroup from 'react-bootstrap/ListGroup'
+import InputGroup from 'react-bootstrap/InputGroup'
 
 import './Posts.css'
 
@@ -114,11 +115,23 @@ class PostsAll extends Component {
       )
     }
     return (
-      <div className="postsAll">
-        <Form inline>
-          <FormControl type="text" placeholder="Search by tag" className="mr-sm-2" onKeyDown={this.keyPress} onChange={this.handleChange} />
-          <Button variant="dark" onClick={this.handleSubmit} className="mr-2">Search</Button>
-          <Button variant="danger" onClick={this.handleClear}>Clear Search</Button>
+      <div className="col-md-4">
+        <Form>
+          <InputGroup className="mb-4">
+            <FormControl type="text" placeholder="Search by tag" onKeyDown={this.keyPress} onChange={this.handleChange} />
+            <InputGroup.Append>
+              <Button variant="dark" onClick={this.handleSubmit}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="16" width="17">
+                  <path fill="white" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                </svg>
+              </Button>
+              <Button variant="danger" onClick={this.handleClear}>
+                <svg aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="18" width="16">
+                  <path fill="white" d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"></path>
+                </svg>
+              </Button>
+            </InputGroup.Append>
+          </InputGroup>
         </Form>
         <div className="postAllPost">{postsJsx}</div>
       </div>

@@ -5,7 +5,6 @@ import axios from 'axios'
 import Moment from 'react-moment'
 
 import apiUrl from '../../apiConfig'
-import Layout from '../Layout/Layout'
 
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
@@ -72,9 +71,9 @@ class Post extends Component {
       return <Redirect to={{ pathname: '/calendar' }}/>
     } else if (post) {
       postJsx = (
-        <div>
+        <div className="col-md-6 col-lg-4 mx-auto">
           <Button variant="dark" className="mb-3 ml-1" onClick={() => this.props.history.push('/calendar')}>Back to Calendar</Button>
-          <Card style={{ width: '34rem', backgroundColor: 'rgba(184, 179, 165, .65)' }}>
+          <Card style={{ width: '100%', backgroundColor: 'rgba(184, 179, 165, .65)' }}>
             <Card.Img variant="top" src={post.file} />
             <Card.Body>
               <Card.Title><Moment add={{ days: 1 }} format="ddd, MMMM DD, YYYY" date={post.date} /></Card.Title>
@@ -93,9 +92,9 @@ class Post extends Component {
     }
 
     return (
-      <Layout md='8' lg='6'>
+      <React.Fragment>
         {postJsx}
-      </Layout>
+      </React.Fragment>
     )
   }
 }
